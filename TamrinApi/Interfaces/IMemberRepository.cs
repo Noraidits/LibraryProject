@@ -12,6 +12,8 @@ namespace TamrinApi.Interfaces
         void UpdateMember(Member member, Guid id);
         void ExtensionExpieryDate (Guid id);
         bool IsmemberActive(Guid Id);
-
+        void addActiveBook(Guid id);
+        void removeActiveBook(Guid id);
+        uint getActiveBookCount(Guid Id);
     }
 }
