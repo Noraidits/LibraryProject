@@ -6,19 +6,15 @@ namespace TamrinApi.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        void IBookRepository.addBook(Book book)
+         void IBookRepository.addBook(Book book)
         {
             bookDataBase.books.Add(book);
         }
 
-        void IBookRepository.addCopy(Book book, Guid ID)
-        {
-            
-        }
 
-        void IBookRepository.deleteBookById(Guid bookId)
+         void IBookRepository.deleteBookById(Guid bookId)
         {
-            throw new NotImplementedException();
+            bookDataBase.books.RemoveAll(b => b.ID == bookId);
         }
 
         IEnumerable<Book> IBookRepository.getAll()
@@ -26,7 +22,7 @@ namespace TamrinApi.Repositories
             throw new NotImplementedException();
         }
 
-        Book IBookRepository.getBookById(Guid bookId)
+        Book? IBookRepository.getBookById(Guid bookId)
         {
             return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
         }
