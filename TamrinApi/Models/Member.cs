@@ -1,6 +1,6 @@
 ﻿namespace TamrinApi.Models
 {
-    public class Member
+    public class Member : Person
     {
     }
 }
