@@ -1,4 +1,5 @@
-﻿using TamrinApi.Database;
+﻿using System.Net;
+using TamrinApi.Database;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 
@@ -11,40 +12,46 @@ namespace TamrinApi.Repositories
             bookDataBase.books.Add(book);
         }
 
-        void IBookRepository.addCopy(Book book, Guid ID)
-        {
-            
-        }
 
         void IBookRepository.deleteBookById(Guid bookId)
         {
-            throw new NotImplementedException();
+            bookDataBase.books.RemoveAll(b => b.ID == bookId);
         }
 
-        IEnumerable<Book> IBookRepository.getAll()
+        IEnumerable<Book> IBookRepository.getAllBooks()
         {
-            throw new NotImplementedException();
+            return bookDataBase.books;
         }
 
-        Book IBookRepository.getBookById(Guid bookId)
+        Book? getBookById(Guid bookId)
         {
             return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
         }
 
-        IEnumerable<Book> IBookRepository.getBookByName(string bookName)
+        IEnumerable<Book>? IBookRepository.getBookByName(string bookName)
         {
-            
+            return bookDataBase.books.Where(b => b.titel == bookName);
         }
 
+       
+
+        void IBookRepository.updateBook(Book book)
+        {
+            
+            var target = getBookById(book.ID);
+            target = book;
+            
+        }
         void IBookRepository.removeCopy(Book book, Guid ID)
         {
             throw new NotImplementedException();
         }
 
-        void IBookRepository.updateBook(Book book)
+        void IBookRepository.addCopy(Book book, Guid ID)
         {
-            throw new NotImplementedException();
+
         }
+
     }
 }
 
