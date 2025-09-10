@@ -1,4 +1,7 @@
-﻿namespace TamrinApi.Models
+﻿using Facebook.Infrastructure.Helper;
+using System.Text.RegularExpressions;
+
+namespace TamrinApi.Models
 {
     public class Librarian : Person
     {
@@ -35,6 +38,8 @@
         }
 
         public bool HashPassCheck(string password)
-    {
+        {
+            return HashHelper.VerifySha256Hash(password, _password);
+        }
     }
 }
