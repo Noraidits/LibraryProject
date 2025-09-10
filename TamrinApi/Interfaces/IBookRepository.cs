@@ -6,7 +6,7 @@ namespace TamrinApi.Interfaces
     {
         Book getBookById(Guid bookId);
         IEnumerable<Book> getBookByName(string bookName);
-        IEnumerable<Book> getAll();
+        IEnumerable<Book> getAllBooks();
         void deleteBookById(Guid bookId);
         void addBook(Book book);
         void updateBook(Book book);

@@ -10,7 +10,7 @@ namespace TamrinApi.Models
             expiryDate = setExpiryDate(joinDate);
         }
 
-        public DateOnly joinDate { get; set; }
+        public DateOnly joinDate { get; init; }
         public DateOnly expiryDate { get; set; }
         public bool isActive { get; set; }
         public uint ActiveBook { get; set; }
