@@ -9,7 +9,7 @@ namespace TamrinApi.Interfaces
         
        public IEnumerable<Book> getBookByName(string bookName);
         
-       public IEnumerable<Book> getAll();
+       public IEnumerable<Book> getAllBooks();
         
        public void deleteBookById(Guid bookId);
         
