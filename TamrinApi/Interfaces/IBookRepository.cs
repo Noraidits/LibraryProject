@@ -4,14 +4,22 @@ namespace TamrinApi.Interfaces
 {
     public interface IBookRepository
     {
-        Book getBookById(Guid bookId);
-        IEnumerable<Book> getBookByName(string bookName);
-        IEnumerable<Book> getAll();
-        void deleteBookById(Guid bookId);
-        void addBook(Book book);
-        void updateBook(Book book);
-        void addCopy(Book book,Guid ID);
-        void removeCopy(Book book, Guid ID);
+        
+       public Book? getBookById(Guid bookId);
+        
+       public IEnumerable<Book> getBookByName(string bookName);
+        
+       public IEnumerable<Book> getAllBooks();
+        
+       public void deleteBookById(Guid bookId);
+        
+       public void addBook(Book book);
+        
+       public void updateBook(Book book);
+        
+       public void addCopy(Book book,Guid ID);
+        
+       public void removeCopy(Book book, Guid ID);
 
 
     }
