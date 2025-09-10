@@ -42,7 +42,7 @@ namespace TamrinApi.Repositories
         }
 
         void IBookRepository.updateBook(Book book)
-    {
+        {
             throw new NotImplementedException();
         }
     }
