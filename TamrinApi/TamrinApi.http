@@ -1,0 +1,6 @@
+@TamrinApi_HostAddress = http://localhost:5070
+
+GET {{TamrinApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

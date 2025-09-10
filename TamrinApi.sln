@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TamrinApi", "TamrinApi\TamrinApi.csproj", "{31E21466-CF9D-41FD-B06F-A6DC7F02C111}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31E21466-CF9D-41FD-B06F-A6DC7F02C111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E21466-CF9D-41FD-B06F-A6DC7F02C111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E21466-CF9D-41FD-B06F-A6DC7F02C111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E21466-CF9D-41FD-B06F-A6DC7F02C111}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A773F42-F048-489F-ADB8-5B93DD72B2E1}
+	EndGlobalSection
+EndGlobal
