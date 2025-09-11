@@ -20,7 +20,7 @@ namespace TamrinApi.Models
             this.availabaleCopies = totalCopies;
         }
 
-        public Guid ID  { get; init; }
+        public Guid ID  { get; private set; }
         public string titel { get; set; }
         public string auther { get; set; }
         public string categoty { get; set; }
