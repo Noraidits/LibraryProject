@@ -11,7 +11,7 @@
             this.shouldReturnDate = ShouldReturnDate(borrowDate);
         }
 
-        public Guid id { get; init; }
+        public Guid id { get; private set; }
         public Guid bookid { get; init; }
         public Guid memberid { get; init; }
         public DateOnly borrowDate { get; init; }
