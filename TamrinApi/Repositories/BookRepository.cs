@@ -56,46 +56,6 @@ public class BookRepository : IBookRepository
         if (target != null) {
             target.totalCopies -= number;
         }
-<<<<<<< HEAD
-=======
 
-        Book? getBookById(Guid bookId)
-        {
-            return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
-        }
-
-        IEnumerable<Book>? IBookRepository.getBookByName(string bookName)
-        {
-            return bookDataBase.books.Where(b => b.titel == bookName);
-        }
-
-       
-
-        void IBookRepository.updateBook(Book book)
-        {
-            
-            var target = getBookById(book.ID);
-            target = book;
-            
-        }
-        void IBookRepository.removeCopy(Book book, Guid ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IBookRepository.addCopy(Book book, Guid ID)
-        {
-
-        }
-
-        Book? IBookRepository.getBookById(Guid bookId)
-        {
-            return getBookById(bookId);
-        }
-
-
-
-
->>>>>>> 22163313a337485b6179fbf40f35267fd8d3feb3
     }
 }

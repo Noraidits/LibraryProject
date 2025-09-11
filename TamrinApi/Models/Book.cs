@@ -9,7 +9,7 @@ namespace TamrinApi.Models
             if (nameChecker(titel))  throw new Exception("titel is not valid");
             if (nameChecker(auther)) throw new Exception("auther is not valid");
             if (nameChecker(categoty)) throw new Exception("categoty is not valid");
-            if (publishedYear < 0 || publishedYear <= DateTime.Now.Year) throw new Exception("publish year is not valid");
+            if (publishedYear < 0 || publishedYear >= DateTime.Now.Year) throw new Exception("publish year is not valid");
 
             ID = Guid.NewGuid();
             this.titel = titel;
@@ -31,7 +31,7 @@ namespace TamrinApi.Models
         private bool nameChecker(string name)
         {
             string pattern = @"^[a-zA-Z\s\(\)\?\!]+$";
-            return Regex.IsMatch(name, pattern);
+            return !Regex.IsMatch(name, pattern);
         }
 
 
