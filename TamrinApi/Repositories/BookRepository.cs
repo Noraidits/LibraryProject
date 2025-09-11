@@ -52,6 +52,14 @@ namespace TamrinApi.Repositories
 
         }
 
+        Book? IBookRepository.getBookById(Guid bookId)
+        {
+            return getBookById(bookId);
+        }
+
+
+
+
     }
 }
 
