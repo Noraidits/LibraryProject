@@ -17,9 +17,9 @@ namespace TamrinApi.Interfaces
         
        public void updateBook(Book book);
         
-       public void addCopy(Book book,Guid ID);
+       public void addCopy(Guid ID, uint number);
         
-       public void removeCopy(Book book, Guid ID);
+       public void removeCopy(Guid ID, uint number);
 
 
     }

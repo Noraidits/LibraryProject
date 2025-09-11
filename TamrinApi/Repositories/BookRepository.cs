@@ -1,57 +1,60 @@
-﻿using System.Net;
-using TamrinApi.Database;
+﻿using TamrinApi.Database;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 
-namespace TamrinApi.Repositories
+public class BookRepository : IBookRepository
 {
-    public class BookRepository : IBookRepository
+    public void addBook(Book book)
     {
-         void addBook(Book book)
-        {
-            bookDataBase.books.Add(book);
+        bookDataBase.books.Add(book);
+    }
+
+    public void deleteBookById(Guid bookId)
+    {
+        bookDataBase.books.RemoveAll(b => b.ID == bookId);
+    }
+
+    public IEnumerable<Book> getAllBooks()
+    {
+        return bookDataBase.books;
+    }
+
+    public Book? getBookById(Guid bookId)
+    {
+        return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
+    }
+
+    public IEnumerable<Book>? getBookByName(string bookName)
+    {
+        return bookDataBase.books.Where(b => b.titel == bookName);
+    }
+
+    public void updateBook(Book book)
+    {
+        var target = getBookById(book.ID);
+        if (target != null) {
+            target.titel = book.titel;
+            target.auther = book.auther;
+            target.categoty = book.categoty;
+            target.publishedYear = book.publishedYear;
+            target.totalCopies = book.totalCopies;
+            target.availabaleCopies = book.availabaleCopies;
         }
+    }
 
-
-         void deleteBookById(Guid bookId)
-        {
-            bookDataBase.books.RemoveAll(b => b.ID == bookId);
+    public void removeCopy(Guid ID, uint number)
+    {
+        var target = getBookById(ID);
+        if (target != null) {
+            target.totalCopies -= number;
         }
+    }
 
-        IEnumerable<Book> getAllBooks()
-        {
-            return bookDataBase.books;
+    public void addCopy(Guid ID, uint number)
+    {
+        var target = getBookById(ID);
+        if (target != null) {
+            target.totalCopies -= number;
         }
-
-        Book? getBookById(Guid bookId)
-        {
-            return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
-        }
-
-        IEnumerable<Book>? getBookByName(string bookName)
-        {
-            return bookDataBase.books.Where(b => b.titel == bookName);
-        }
-
-       
-
-        void updateBook(Book book)
-        {
-            
-            var target = getBookById(book.ID);
-            target = book;
-            
-        }
-        void removeCopy(Book book, Guid ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        void addCopy(Book book, Guid ID)
-        {
-
-        }
-
     }
 }
-

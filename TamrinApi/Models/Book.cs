@@ -4,7 +4,7 @@ namespace TamrinApi.Models
 {
     public class Book
     {
-        public Book( string titel, string auther, string categoty, uint publishedYear, int totalCopies, int availabaleCopies)
+        public Book( string titel, string auther, string categoty, uint publishedYear, uint totalCopies, uint availabaleCopies)
         {
             if (nameChecker(titel))  throw new Exception("titel is not valid");
             if (nameChecker(auther)) throw new Exception("auther is not valid");
@@ -25,8 +25,8 @@ namespace TamrinApi.Models
         public string auther { get; set; }
         public string categoty { get; set; }
         public uint publishedYear { get; set; }
-        public int totalCopies { get; set; }
-        public int availabaleCopies { get; set; }
+        public uint totalCopies { get; set; }
+        public uint availabaleCopies { get; set; }
 
         private bool nameChecker(string name)
         {
