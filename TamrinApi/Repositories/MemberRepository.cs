@@ -1,6 +1,7 @@
 ﻿using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Database;
+using System.Reflection.Metadata.Ecma335;
 
 namespace TamrinApi.Repositories
 {
@@ -56,6 +57,25 @@ namespace TamrinApi.Repositories
             var target = GetMemberById(Id);
 
             return target.isActive;
+        }
+
+        public void addActiveBook(Guid id)
+        {
+            var target = GetMemberById(id);
+            target.ActiveBook++;
+        }
+
+        public void removeActiveBook(Guid id)
+        {
+            var target = GetMemberById(id);
+            target.ActiveBook--;
+        }
+
+        public uint getActiveBookCount(Guid Id)
+        {
+            var target = GetMemberById(Id);
+
+            return target.ActiveBook;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace TamrinApi.Models
 
         public DateOnly setExpiryDate(DateOnly JoinDate)
         {
-            return joinDate.AddDays(180);
+            return JoinDate.AddDays(180);
         }
     }
 }
