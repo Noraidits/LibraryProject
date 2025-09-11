@@ -13,7 +13,7 @@ namespace TamrinApi.Controllers
         {
             _bookRepository = bookRepository;
         }
-        [HttpPost("add book")]
+        [HttpPost("addBook")]
         public IActionResult addBook([FromBody] Book book)
         {
             _bookRepository.addBook(book);
@@ -22,7 +22,7 @@ namespace TamrinApi.Controllers
 
 
 
-        [HttpGet("getById {id}")]
+        [HttpGet("getById{id}")]
         public IActionResult getBookById(Guid id)
         {
             var book = _bookRepository.getBookById(id);
@@ -34,7 +34,7 @@ namespace TamrinApi.Controllers
             return Ok(book);
         }
 
-        [HttpGet("getByName {name}")]
+        [HttpGet("getByName{name}")]
         public IActionResult getBookByname(string name)
         {
             var books = _bookRepository.getBookByName(name);
