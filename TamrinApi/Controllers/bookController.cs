@@ -13,6 +13,15 @@ namespace TamrinApi.Controllers
         {
             _bookRepository = bookRepository;
         }
+        [HttpPost]
+        public IActionResult addBook([FromBody] Book book)
+        {
+            _bookRepository.addBook(book);
+            return Created();
+        }
+
+
+
         [HttpGet("{id}")]
         public IActionResult getBookById(Guid id)
         {
@@ -24,5 +33,12 @@ namespace TamrinApi.Controllers
 
             return Ok(book);
         }
-    } 
+        [HttpGet]
+        public IActionResult GetAllBooks()
+        {
+            var books = _bookRepository.getAllBooks();
+            return Ok(books);
+        }
+
+    }
 }
