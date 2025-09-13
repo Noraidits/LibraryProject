@@ -5,10 +5,12 @@ namespace TamrinApi.Models
     public class Member : Person
     {
 
+
         public Member(Guid id, string fullName, string email, string phoneNumber) : base(id, fullName, email, phoneNumber)
         {
             
             this. isActive = true;
+
             this.joinDate = DateOnly.FromDateTime(DateTime.Now);
             this.expiryDate = setExpiryDate(joinDate);
         }

@@ -18,7 +18,7 @@ namespace TamrinApi.Models
 
         public Guid id { get; protected set; }
         public string fullName { get; set; }
-        public string email { get; set; }
+        public string email { get; set; } 
         public string phoneNumber { get; set; }
 
 

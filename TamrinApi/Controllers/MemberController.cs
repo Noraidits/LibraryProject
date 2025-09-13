@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TamrinApi.Extensions;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
+using TamrinApi.Models.DTOs;
 
 namespace TamrinApi.Controllers
 {
@@ -19,7 +21,7 @@ namespace TamrinApi.Controllers
         public IActionResult GetAll()
         {
             {
-                return Ok(_memberRepository.GetAllMembers());
+                return Ok(_memberRepository.GetAllMembers().Select(Member => Member.AsDto()));
             }
         }
         [HttpGet("{id}")]
@@ -28,9 +30,18 @@ namespace TamrinApi.Controllers
             return Ok(_memberRepository.GetMemberById(id));
         }
 
+
         [HttpPost("addMember")]
         public IActionResult AddMember([FromBody] Member member)
+
         {
+            Member member = new()
+            {   
+                fullName = memberDto.fullName,
+                email = memberDto.email,
+                phoneNumber = memberDto.phoneNumber
+            };
+
             _memberRepository.AddMember(member);
             return Created();
         }
