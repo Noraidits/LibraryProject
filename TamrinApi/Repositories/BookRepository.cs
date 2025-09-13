@@ -26,7 +26,7 @@ public class BookRepository : IBookRepository
 
     public IEnumerable<Book>? getBookByName(string bookName)
     {
-        return bookDataBase.books.Where(b => b.titel == bookName);
+        return bookDataBase.books.Where(b => b.titel==(bookName));
     }
 
     public void updateBook(Book book)
