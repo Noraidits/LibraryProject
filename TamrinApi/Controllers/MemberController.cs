@@ -32,16 +32,7 @@ namespace TamrinApi.Controllers
 
 
         [HttpPost("addMember")]
-        public IActionResult AddMember([FromBody] Member member)
-
-        {
-            Member member = new()
-            {   
-                fullName = memberDto.fullName,
-                email = memberDto.email,
-                phoneNumber = memberDto.phoneNumber
-            };
-
+        public IActionResult AddMember([FromBody] Member member) {
             _memberRepository.AddMember(member);
             return Created();
         }
