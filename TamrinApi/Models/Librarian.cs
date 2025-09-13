@@ -11,9 +11,6 @@ namespace TamrinApi.Models
             CheckUserName(userName);
             CheckinputPass(Password);
 
-            id = Guid.NewGuid();
-            this.id = id;
-
             this.userName = userName;
             this.Password = Password;
         }
