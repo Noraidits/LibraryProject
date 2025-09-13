@@ -4,6 +4,7 @@ namespace TamrinApi.Models
 {
     public class Member : Person
     {
+
         public Member(Guid id, string fullName, string email, string phoneNumber) : base(id, fullName, email, phoneNumber)
         {
             
