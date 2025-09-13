@@ -6,6 +6,8 @@ namespace TamrinApi.Models
     {
         public Member(Guid id, string fullName, string email, string phoneNumber,DateOnly joinDate,DateOnly expiryDate, bool isActive = true,uint ActiveBook = 0) : base(id, fullName, email, phoneNumber)
         {
+            id = Guid.NewGuid();
+            this.id = id;
             joinDate = DateOnly.FromDateTime(DateTime.Now);
             expiryDate = setExpiryDate(joinDate);
         }

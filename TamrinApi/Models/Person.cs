@@ -10,13 +10,13 @@ namespace TamrinApi.Models
             CheckEmail(email);
             CheckPhoneNumber(phoneNumber);
 
-            this.id = Guid.NewGuid();
+            
             this.fullName = fullName;
             this.email = email;
             this.phoneNumber = phoneNumber;
         }
 
-        public Guid id { get; private set; }
+        public Guid id { get; protected set; }
         public string fullName { get; set; }
         public string email { get; set; }
         public string phoneNumber { get; set; }
@@ -24,26 +24,26 @@ namespace TamrinApi.Models
 
         public void CheckFullName(string fullName)
         {
-            if (!string.IsNullOrEmpty(fullName)) throw new Exception("Name is empty or null");
+            if (string.IsNullOrEmpty(fullName)) throw new Exception("Name is empty or null");
 
-            var Reg = "/^[a-z ,.'-]+$/i";
-            if (!Regex.IsMatch(fullName, Reg)) throw new Exception("pls ust use A-z");
+            var Reg = @"^[a-z ,.'-]+$";
+            if (Regex.IsMatch(fullName, Reg)) { throw new Exception("pls ust use A-z"); }
         }
 
         public void CheckEmail(string email)
         {
-            if (!string.IsNullOrEmpty(email)) throw new Exception("Email is empty or null");
+            if (string.IsNullOrEmpty(email)) throw new Exception("Email is empty or null");
 
-            var Reg = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
-            if (!Regex.IsMatch(email, Reg)) throw new Exception("pls enter the valid Email");
+            var Reg = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$\r\n";
+            if (Regex.IsMatch(email, Reg)) throw new Exception("pls enter the valid Email");
         }
 
         public void CheckPhoneNumber(string phoneNumber)
         {
-            if (!string.IsNullOrEmpty(phoneNumber)) throw new Exception("Phone Number is Empty or Null");
+            if (string.IsNullOrEmpty(phoneNumber)) throw new Exception("Phone Number is Empty or Null");
 
-            var Reg = "^(\\+98|0)?9\\d{9}$";
-            if (!Regex.IsMatch(phoneNumber,Reg)) throw new Exception("pls enter the valid number") ;
+            var Reg = "^(\\+98|0)\\d{9}$";
+            if (Regex.IsMatch(phoneNumber,Reg)) throw new Exception("pls enter the valid phone number") ;
         }
     }
 }
