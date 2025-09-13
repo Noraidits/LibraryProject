@@ -4,7 +4,7 @@ namespace TamrinApi.Models
 {
     public class Member : Person
     {
-        public Member(Guid id, string fullName, string email, string phoneNumber,DateOnly joinDate,DateOnly expiryDate, bool isActive = true,uint ActiveBook = 0) : base(id, fullName, email, phoneNumber)
+        public Member(string fullName, string email, string phoneNumber,DateOnly joinDate,DateOnly expiryDate, bool isActive = true,uint ActiveBook = 0) : base( fullName, email, phoneNumber)
         {
             joinDate = DateOnly.FromDateTime(DateTime.Now);
             expiryDate = setExpiryDate(joinDate);

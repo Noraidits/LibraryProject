@@ -4,7 +4,7 @@ namespace TamrinApi.Models
 {
     public class Person
     {
-        public Person(Guid id, string fullName, string email, string phoneNumber)
+        public Person( string fullName, string email, string phoneNumber)
         {
             CheckFullName(fullName);
             CheckEmail(email);
