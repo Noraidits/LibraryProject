@@ -6,7 +6,7 @@ namespace TamrinApi.Models
     public class Librarian : Person
     {
         private string _password = "";
-        public Librarian(Guid id, string fullName, string email, string phoneNumber, string userName, string Password) : base(id, fullName, email, phoneNumber)
+        public Librarian( string fullName, string email, string phoneNumber, string userName, string Password) : base( fullName, email, phoneNumber)
         {
             CheckUserName(userName);
             CheckinputPass(Password);
