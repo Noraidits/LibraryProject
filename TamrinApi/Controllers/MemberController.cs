@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TamrinApi.Interfaces;
+using TamrinApi.Models;
 
 namespace TamrinApi.Controllers
 {
@@ -25,6 +26,13 @@ namespace TamrinApi.Controllers
         public IActionResult Getbyid(Guid id)
         {
             return Ok(_memberRepository.GetMemberById(id));
+        }
+
+        [HttpPost]
+        public IActionResult AddMember([FromBody] Member member)
+        {
+            _memberRepository.AddMember(member);
+            return Created();
         }
     }
 }
