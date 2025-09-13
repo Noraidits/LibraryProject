@@ -6,13 +6,12 @@ namespace TamrinApi.Models
     {
 
 
-        public Member(string fullName, string email, string phoneNumber) : base( fullName, email, phoneNumber)
+        public Member(string fullName, string email, string phoneNumber) : base(fullName, email, phoneNumber)
         {
-            
-            this. isActive = true;
 
+            this.isActive = true;
             this.joinDate = DateOnly.FromDateTime(DateTime.Now);
-            this.expiryDate = setExpiryDate(joinDate);
+            this.expiryDate = joinDate.AddDays(180);
         }
 
         public DateOnly joinDate { get; private set; }
@@ -20,9 +19,6 @@ namespace TamrinApi.Models
         public bool isActive { get; set; }
         public uint ActiveBook { get; set; }
 
-        public DateOnly setExpiryDate(DateOnly JoinDate)
-        {
-            return JoinDate.AddDays(180);
-        }
+
     }
 }

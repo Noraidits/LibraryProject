@@ -17,6 +17,12 @@ namespace TamrinApi.Controllers
             _memberRepository = memberRepository;
         }
 
+
+        [HttpPost("addMember")]
+        public IActionResult AddMember([FromBody] Member member) {
+            _memberRepository.AddMember(member);
+            return Created();
+        }
         [HttpGet("All")]
         public IActionResult GetAll()
         {
@@ -30,12 +36,6 @@ namespace TamrinApi.Controllers
             return Ok(_memberRepository.GetMemberById(id));
         }
 
-
-        [HttpPost("addMember")]
-        public IActionResult AddMember([FromBody] Member member) {
-            _memberRepository.AddMember(member);
-            return Created();
-        }
         [HttpPut("addTOExoyeryDate")]
         public IActionResult AddToAddTOExpieryDate( Guid Id)
         {
