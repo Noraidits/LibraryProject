@@ -4,13 +4,16 @@ namespace TamrinApi.Models
 {
     public class Member : Person
     {
-        public Member(string fullName, string email, string phoneNumber,DateOnly joinDate,DateOnly expiryDate, bool isActive = true,uint ActiveBook = 0) : base( fullName, email, phoneNumber)
+
+        public Member(Guid id, string fullName, string email, string phoneNumber) : base(id, fullName, email, phoneNumber)
         {
-            joinDate = DateOnly.FromDateTime(DateTime.Now);
-            expiryDate = setExpiryDate(joinDate);
+            
+            this. isActive = true;
+            this.joinDate = DateOnly.FromDateTime(DateTime.Now);
+            this.expiryDate = setExpiryDate(joinDate);
         }
 
-        public DateOnly joinDate { get; init; }
+        public DateOnly joinDate { get; private set; }
         public DateOnly expiryDate { get; set; }
         public bool isActive { get; set; }
         public uint ActiveBook { get; set; }

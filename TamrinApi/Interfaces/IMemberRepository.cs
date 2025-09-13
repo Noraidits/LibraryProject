@@ -10,7 +10,7 @@ namespace TamrinApi.Interfaces
         void DeleteMemberById(Guid id);
         void AddMember(Member member);
         void UpdateMember(Member member, Guid id);
-        void ExtensionExpieryDate (Guid id);
+        void AddTOExpieryDate (Guid id);
         bool IsmemberActive(Guid Id);
         void addActiveBook(Guid id);
         void removeActiveBook(Guid id);

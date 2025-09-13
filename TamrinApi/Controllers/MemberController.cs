@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TamrinApi.Interfaces;
+using TamrinApi.Models;
 
 namespace TamrinApi.Controllers
 {
@@ -14,7 +15,7 @@ namespace TamrinApi.Controllers
             _memberRepository = memberRepository;
         }
 
-        [HttpGet]
+        [HttpGet("All")]
         public IActionResult GetAll()
         {
             {
@@ -25,6 +26,25 @@ namespace TamrinApi.Controllers
         public IActionResult Getbyid(Guid id)
         {
             return Ok(_memberRepository.GetMemberById(id));
+        }
+
+        [HttpPost("addMember")]
+        public IActionResult AddMember([FromBody] Member member)
+        {
+            _memberRepository.AddMember(member);
+            return Created();
+        }
+        [HttpPut("addTOExoyeryDate")]
+        public IActionResult AddToAddTOExpieryDate( Guid Id)
+        {
+            _memberRepository.AddTOExpieryDate(Id);
+            return Created();
+        }
+        [HttpPut("updateMember")]
+        public IActionResult UpdateMember([FromBody] Member member)
+        {
+            _memberRepository.UpdateMember(member,member.id);
+            return Ok();
         }
     }
 }
