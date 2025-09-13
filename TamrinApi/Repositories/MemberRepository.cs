@@ -16,7 +16,7 @@ namespace TamrinApi.Repositories
             MemberDataBase.members.Add(member);
         }
 
-        public void ExtensionExpieryDate(Guid id)
+        public void AddTOExpieryDate(Guid id)
         {
             var target = GetMemberById(id);
             if (!target.isActive)
@@ -43,6 +43,8 @@ namespace TamrinApi.Repositories
 
             target.email = member.email;
             target.phoneNumber = member.phoneNumber;
+            target.fullName = member.fullName;
+            //target.isActive = member.isActive;
 
         }
 
