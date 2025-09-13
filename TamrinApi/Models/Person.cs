@@ -16,7 +16,7 @@ namespace TamrinApi.Models
             this.phoneNumber = phoneNumber;
         }
 
-        public Guid id { get; protected set; }
+        public Guid id { get; private set; }
         public string fullName { get; set; }
         public string email { get; set; } 
         public string phoneNumber { get; set; }
