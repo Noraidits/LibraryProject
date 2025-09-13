@@ -6,7 +6,7 @@ namespace TamrinApi.Models
     {
 
 
-        public Member(Guid id, string fullName, string email, string phoneNumber) : base(id, fullName, email, phoneNumber)
+        public Member(string fullName, string email, string phoneNumber) : base( fullName, email, phoneNumber)
         {
             
             this. isActive = true;
