@@ -1,6 +1,6 @@
 ﻿namespace TamrinApi.Controllers
 {
-    public class BarrowController
+    public class BarrowController 
     {
 
     }
