@@ -19,11 +19,17 @@ namespace TamrinApi.Controllers
 
 
         [HttpPost("addMember")]
-        public IActionResult AddMember([FromBody] Member member) {
+        public IActionResult AddMember([FromBody] createMember memberDto) {
+
+            Member member = new Member(memberDto.fullName, memberDto.email,memberDto.phoneNumber);
+
+
+
             _memberRepository.AddMember(member);
             return Created();
         }
         [HttpGet("All")]
+
         public IActionResult GetAll()
         {
             {

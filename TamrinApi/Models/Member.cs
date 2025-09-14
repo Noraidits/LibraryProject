@@ -4,10 +4,10 @@ namespace TamrinApi.Models
 {
     public class Member : Person
     {
-
+        
 
         public Member(string fullName, string email, string phoneNumber) : base(fullName, email, phoneNumber)
-        {
+        { 
 
             this.isActive = true;
             this.joinDate = DateOnly.FromDateTime(DateTime.Now);
