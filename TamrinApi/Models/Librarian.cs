@@ -10,7 +10,6 @@ namespace TamrinApi.Models
         {
             CheckUserName(userName);
             CheckinputPass(Password);
-
             this.userName = userName;
             this.Password = Password;
         }
