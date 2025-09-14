@@ -92,6 +92,10 @@ namespace TamrinApi.Repositories
             {
                 return false;
             }
+            else if (target.ActiveBook >= 5)
+            {
+                return false;
+            }
             else
             {
                 return true;
