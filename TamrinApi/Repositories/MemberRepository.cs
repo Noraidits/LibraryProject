@@ -37,7 +37,7 @@ namespace TamrinApi.Repositories
             return result;
         }
 
-        public void UpdateMember(Member member,Guid id)
+        public void UpdateMember(Member member, Guid id)
         {
             var target = GetMemberById(id);
 
@@ -78,6 +78,28 @@ namespace TamrinApi.Repositories
             var target = GetMemberById(Id);
 
             return target.ActiveBook;
+        }
+
+        public bool memberCanBorrow(Guid Id)
+        {
+            var target = GetMemberById(Id);
+
+            if (target.isActive)
+            {
+                return false;
+            }
+            else if (DateOnly.FromDateTime(DateTime.Now) >= target.expiryDate)
+            {
+                return false;
+            }
+            else if (target.ActiveBook >= 5)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
