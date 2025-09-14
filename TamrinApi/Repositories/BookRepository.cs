@@ -59,7 +59,7 @@ public class BookRepository : IBookRepository
 
     }
 
-    public bool IsbookExistForGet(Guid id)
+    public bool IsbookExisttoGet(Guid id)
     {
         var target = getBookById(id);
 
