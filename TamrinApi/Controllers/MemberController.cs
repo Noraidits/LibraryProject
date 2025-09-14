@@ -23,8 +23,6 @@ namespace TamrinApi.Controllers
 
             Member member = new Member(memberDto.fullName, memberDto.email,memberDto.phoneNumber);
 
-
-
             _memberRepository.AddMember(member);
             return Created();
         }
