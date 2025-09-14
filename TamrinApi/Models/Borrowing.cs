@@ -2,7 +2,7 @@
 {
     public class Borrowing
     {
-        public Borrowing(Guid id, Guid bookid, Guid memberid, DateOnly borrowDate, DateOnly shouldReturnDate, DateOnly returnDate)
+        public Borrowing(Guid bookid, Guid memberid)
         {
             this.id = Guid.NewGuid();
             this.bookid = bookid;
