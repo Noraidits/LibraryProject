@@ -1,4 +1,5 @@
-﻿using TamrinApi.Models;
+﻿using System.Data.SqlTypes;
+using TamrinApi.Models;
 
 namespace TamrinApi.Interfaces
 {
@@ -15,5 +16,6 @@ namespace TamrinApi.Interfaces
         void addActiveBook(Guid id);
         void removeActiveBook(Guid id);
         uint getActiveBookCount(Guid Id);
+        bool memberCanBorrow(Guid Id);
     }
 }

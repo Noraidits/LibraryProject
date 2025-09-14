@@ -58,4 +58,12 @@ public class BookRepository : IBookRepository
         }
 
     }
+
+    public bool IsbookExistForGet(Guid id)
+    {
+        var target = getBookById(id);
+
+        return (target.availabaleCopies > 0)? true : false;
+        
+    }
 }
