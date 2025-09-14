@@ -15,9 +15,11 @@ namespace TamrinApi.Servises
         {
             if (_member.GetMemberById(memberId) == null) throw new Exception("your member is not exist");
             if (_book.getBookById(bookid) == null) throw new Exception("your book is not exist");
-
-
-
+            if (_member.memberCanBorrow(bookid)) throw new Exception("you can't borrow book(expiring or full 5 book");
+            if (_book.IsbookExistForGet(bookid)) throw new Exception("your target book is not in library");
+            
+            _book.removeCopy(bookid,1);
+            _member.addActiveBook(memberId);
         }
     }
 }
