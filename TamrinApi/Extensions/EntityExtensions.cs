@@ -3,7 +3,7 @@ using TamrinApi.Models.DTOs;
 
 namespace TamrinApi.Extensions
 {
-    public static class EntityExtension
+    public static class EntityExtensions
     {
         public static MemberDto AsDto(this Member member)
         {
@@ -19,7 +19,22 @@ namespace TamrinApi.Extensions
             member.ActiveBook
             );
         }
-        
+        public static bookDto AsDto(this Book book)
+        {
+
+            return new bookDto(
+                book.ID,
+                book.titel,
+                book.auther,
+                book.categoty,
+                book.publishedYear,
+                book.totalCopies,
+                book.availabaleCopies
+
+            );
+
+        }
+
     }
 }
 

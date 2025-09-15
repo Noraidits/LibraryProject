@@ -2,6 +2,7 @@
 using System.Net.NetworkInformation;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
+using TamrinApi.Models.DTOs;
 
 namespace TamrinApi.Controllers
 {
@@ -16,8 +17,9 @@ namespace TamrinApi.Controllers
         }
 
         [HttpPost("addBook")]
-        public IActionResult addBook([FromBody] Book book)
+        public IActionResult addBook([FromBody] bookDto bookDto)
         {
+            Book book = new Book(bookDto.titel ,bookDto.auther,bookDto.categoty, bookDto.publishedYear,bookDto.totalCopies,bookDto.availabaleCopies);
             _bookRepository.addBook(book);
             return Ok(book);
         }
@@ -38,7 +40,7 @@ namespace TamrinApi.Controllers
             }
             else return BadRequest("Id is not find");
         }
-        [HttpPut("addBook")]
+        [HttpPut("addCopyBook")]
         public IActionResult addcopy(Guid ID, uint number)
         {
             if (_bookRepository.getBookById(ID) != null) {
