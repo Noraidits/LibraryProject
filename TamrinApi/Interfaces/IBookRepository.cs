@@ -22,5 +22,7 @@ namespace TamrinApi.Interfaces
        public void removeCopy(Guid ID, uint number);
 
        public bool IsbookExisttoGet(Guid id);
+
+        public void Removeavaliblebook(Guid id);
     }
 }

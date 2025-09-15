@@ -1,6 +1,7 @@
 ﻿using TamrinApi.Database;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class BookRepository : IBookRepository
 {
@@ -65,5 +66,14 @@ public class BookRepository : IBookRepository
 
         return target != null && target.availabaleCopies > 0;
         
+    }
+
+    public void Removeavaliblebook(Guid id)
+    {
+        var target = getBookById(id);
+        if (target != null)
+        {
+            target.availabaleCopies += 1;
+        }
     }
 }

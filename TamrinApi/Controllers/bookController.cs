@@ -18,7 +18,7 @@ namespace TamrinApi.Controllers
         public IActionResult addBook([FromBody] Book book)
         {
             _bookRepository.addBook(book);
-            return Created();
+            return Ok(book);
         }
 
 

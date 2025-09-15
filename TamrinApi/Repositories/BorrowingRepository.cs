@@ -1,4 +1,5 @@
-﻿using TamrinApi.Database;
+﻿using System.Net;
+using TamrinApi.Database;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 
@@ -6,10 +7,7 @@ namespace TamrinApi.Repositories
 {
     public class BorrowingRepository : IBorrowingRepository
     {
-        public void addBorrow(Borrowing borrow)
-        {
-            BorrowDatabase.borrowings.Add(borrow);
-        }
+        
 
         public Borrowing? GetBorrowingByid(Guid id)
         {
@@ -34,6 +32,19 @@ namespace TamrinApi.Repositories
             var target = GetBorrowingByid(id);
 
             target.returnDate = returndaate;
+        }
+
+        public void addBorrow(Borrowing borrow)
+        {
+            Database.BorrowDatabase.borrowings.Add(borrow);
+        }
+
+        public void AddborrowingForservice(Guid memberId, Guid bookId)
+        {
+            Borrowing borrowing = new Borrowing(bookId, memberId);
+                         
+            addBorrow(borrowing);
+
         }
     }
 }
