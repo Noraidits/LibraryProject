@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 
@@ -20,7 +21,32 @@ namespace TamrinApi.Controllers
             _bookRepository.addBook(book);
             return Ok(book);
         }
-
+        [HttpPut("updateBook")]
+        public IActionResult updateBook([FromBody] Book book) {
+            if (_bookRepository.getBookById(book.ID) != null) {
+                _bookRepository.updateBook(book);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
+        }
+        [HttpPut("removeCopy")]
+        public IActionResult addCopy(Guid ID, uint number)
+        {
+            if (_bookRepository.getBookById(ID) != null) {
+                _bookRepository.removeCopy(ID,number);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
+        }
+        [HttpPut("updateBook")]
+        public IActionResult addcopy(Guid ID, uint number)
+        {
+            if (_bookRepository.getBookById(ID) != null) {
+                _bookRepository.addCopy(ID,number);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
+        }
 
 
         [HttpGet("getById{id}")]
@@ -54,6 +80,14 @@ namespace TamrinApi.Controllers
             var books = _bookRepository.getAllBooks();
             return Ok(books);
         }
+
+        [HttpDelete("DeletByID")]
+        public IActionResult actionResult(Guid id) {
+            if(_bookRepository.getBookById(id) == null) return NoContent();
+            _bookRepository.deleteBookById(id);
+            return Ok();
+        }
+
 
     }
 }
