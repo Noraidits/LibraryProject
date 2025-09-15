@@ -10,8 +10,7 @@ namespace TamrinApi.Interfaces
         IEnumerable<Borrowing> GetBorrowByBook(Guid bookid);
         void addBorrow(Borrowing borrow);
         void updatereturndate (DateOnly returndaate, Guid id);
-
-
+        void AddborrowingForservice(Guid memberId, Guid bookId);
     }
 
 }
