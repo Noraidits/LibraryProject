@@ -54,7 +54,7 @@ public class BookRepository : IBookRepository
     {
         var target = getBookById(ID);
         if (target != null) {
-            target.totalCopies -= number;
+            target.totalCopies += number;
         }
 
     }
@@ -63,7 +63,7 @@ public class BookRepository : IBookRepository
     {
         var target = getBookById(id);
 
-        return (target.availabaleCopies > 0)? true : false;
+        return target != null && target.availabaleCopies > 0;
         
     }
 }
