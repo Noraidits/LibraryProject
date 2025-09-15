@@ -12,18 +12,18 @@ namespace TamrinApi.Models
             if (publishedYear < 0 || publishedYear >= DateTime.Now.Year) throw new Exception("publish year is not valid");
 
             ID = Guid.NewGuid();
-            this.titel = titel;
+            this.title = titel;
             this.auther = auther;
-            this.categoty = categoty;
+            this.category = categoty;
             this.publishedYear = publishedYear;
             this.totalCopies = totalCopies;
             this.availabaleCopies = totalCopies;
         }
 
         public Guid ID  { get; private set; }
-        public string titel { get; set; }
+        public string title { get; set; }
         public string auther { get; set; }
-        public string categoty { get; set; }
+        public string category { get; set; }
         public uint publishedYear { get; set; }
         public uint totalCopies { get; set; }
         public uint availabaleCopies { get; set; }
