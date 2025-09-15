@@ -85,7 +85,7 @@ namespace TamrinApi.Repositories
         {
             var target = GetMemberById(Id);
 
-            if (target.isActive)
+            if (!target.isActive)
             {
                 return false;
             }
