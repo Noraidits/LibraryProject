@@ -1,5 +1,6 @@
 using TamrinApi.Interfaces;
 using TamrinApi.Repositories;
+using TamrinApi.Servises;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
-
+builder.Services.AddScoped<IBorrowingRepository, BorrowingRepository>();
 
 var app = builder.Build();
 
