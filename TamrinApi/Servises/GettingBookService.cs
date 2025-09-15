@@ -7,15 +7,19 @@ namespace TamrinApi.Servises
 {
     public class GettingBookService
     {
-        private MemberRepository _member;
-        private BookRepository _book;
-
+        private MemberRepository? _member;
+        private BookRepository? _book;
+        public GettingBookService(MemberRepository member,BookRepository book)
+        {
+            _member = member;
+            _book = book;
+        }
 
         public void GetBookByMember(Guid memberId, Guid bookid)
         {
             if (_member.GetMemberById(memberId) == null) throw new Exception("your member is not exist");
             if (_book.getBookById(bookid) == null) throw new Exception("your book is not exist");
-            if (_member.memberCanBorrow(bookid)) throw new Exception("you can't borrow book(expiring or full 5 book");
+            if (_member.memberCanBorrow(memberId)) throw new Exception("you can't borrow book(expiring or full 5 book");
             if (_book.IsbookExisttoGet(bookid)) throw new Exception("your target book is not in library");
             
             _book.removeCopy(bookid,1);
