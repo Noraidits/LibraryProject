@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 builder.Services.AddScoped<IBorrowingRepository, BorrowingRepository>();
+builder.Services.AddScoped<IGettingBookService,GettingBookService>();
+
 
 var app = builder.Build();
 

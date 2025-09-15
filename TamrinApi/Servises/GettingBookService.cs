@@ -5,11 +5,11 @@ using TamrinApi.Repositories;
 
 namespace TamrinApi.Servises
 {
-    public class GettingBookService
+    public class GettingBookService : IGettingBookService
     {
-        private MemberRepository _member;
-        private BookRepository _book;
-        public GettingBookService(MemberRepository member,BookRepository book)
+        private IMemberRepository _member;
+        private IBookRepository _book;
+        public GettingBookService(IMemberRepository member, IBookRepository book)
         {
             _member = member;
             _book = book;
@@ -19,8 +19,8 @@ namespace TamrinApi.Servises
         {
             if (_member.GetMemberById(memberId) == null) throw new Exception("your member is not exist");
             if (_book.getBookById(bookid) == null) throw new Exception("your book is not exist");
-            if (_member.memberCanBorrow(memberId)) throw new Exception("you can't borrow book(expiring or full 5 book");
-            if (_book.IsbookExisttoGet(bookid)) throw new Exception("your target book is not in library");
+            if (!_member.memberCanBorrow(memberId)) throw new Exception("you can't borrow book(expiring or full 5 book");
+            if (!_book.IsbookExisttoGet(bookid)) throw new Exception("your target book is not in library");
 
             _book.Removeavaliblebook(bookid);
             _member.addActiveBook(memberId);

@@ -38,7 +38,7 @@ namespace TamrinApi.Controllers
             }
             else return BadRequest("Id is not find");
         }
-        [HttpPut("updateBook")]
+        [HttpPut("(Addcopy)Book")]
         public IActionResult addcopy(Guid ID, uint number)
         {
             if (_bookRepository.getBookById(ID) != null) {
