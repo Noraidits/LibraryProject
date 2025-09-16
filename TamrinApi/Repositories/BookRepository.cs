@@ -20,23 +20,20 @@ public class BookRepository : IBookRepository
         return bookDataBase.books;
     }
 
-    public Book? getBookById(Guid bookId)
-    {
-        return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
-    }
+    public Book? getBookById(Guid bookId) => bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
 
     public IEnumerable<Book>? getBookByName(string bookName)
     {
-        return bookDataBase.books.Where(b => b.titel==(bookName));
+        return bookDataBase.books.Where(b => b.title==(bookName));
     }
 
     public void updateBook(Book book)
     {
         var target = getBookById(book.ID);
         if (target != null) {
-            target.titel = book.titel;
+            target.title = book.title;
             target.auther = book.auther;
-            target.categoty = book.categoty;
+            target.category = book.category;
             target.publishedYear = book.publishedYear;
             target.totalCopies = book.totalCopies;
             target.availabaleCopies = book.availabaleCopies;
@@ -69,6 +66,15 @@ public class BookRepository : IBookRepository
     }
 
     public void Removeavaliblebook(Guid id)
+    {
+        var target = getBookById(id);
+        if (target != null)
+        {
+            target.availabaleCopies -= 1;
+        }
+    }
+
+    public void Addavaleblebook(Guid id)
     {
         var target = getBookById(id);
         if (target != null)

@@ -6,9 +6,9 @@ namespace TamrinApi.Models
     {
         public Person( string fullName, string email, string phoneNumber)
         {
-            //CheckFullName(fullName);
-            //CheckEmail(email);
-            //CheckPhoneNumber(phoneNumber);
+            CheckFullName(fullName);
+            CheckEmail(email);
+            CheckPhoneNumber(phoneNumber);
 
             this.id = Guid.NewGuid();
             this.fullName = fullName;

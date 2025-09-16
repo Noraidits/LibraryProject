@@ -18,6 +18,8 @@
         public DateOnly shouldReturnDate { get; init; }
         public DateOnly returnDate { get; set; }
 
+        public DateOnly MaxBrrowingDate => this.borrowDate.AddDays(14);
+
         public DateOnly ShouldReturnDate(DateOnly boorrowDate)
         {
             return boorrowDate.AddDays(14);
