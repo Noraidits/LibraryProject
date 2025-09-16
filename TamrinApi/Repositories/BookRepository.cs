@@ -20,10 +20,7 @@ public class BookRepository : IBookRepository
         return bookDataBase.books;
     }
 
-    public Book? getBookById(Guid bookId)
-    {
-        return bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
-    }
+    public Book? getBookById(Guid bookId) => bookDataBase.books.SingleOrDefault(c => c.ID == bookId);
 
     public IEnumerable<Book>? getBookByName(string bookName)
     {
@@ -69,6 +66,15 @@ public class BookRepository : IBookRepository
     }
 
     public void Removeavaliblebook(Guid id)
+    {
+        var target = getBookById(id);
+        if (target != null)
+        {
+            target.availabaleCopies -= 1;
+        }
+    }
+
+    public void Addavaleblebook(Guid id)
     {
         var target = getBookById(id);
         if (target != null)

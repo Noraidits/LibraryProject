@@ -7,7 +7,7 @@ namespace TamrinApi.Interfaces
         
        public Book? getBookById(Guid bookId);
         
-       public IEnumerable<Book> getBookByName(string bookName);
+       public IEnumerable<Book>? getBookByName(string bookName);
         
        public IEnumerable<Book> getAllBooks();
         
@@ -24,5 +24,6 @@ namespace TamrinApi.Interfaces
        public bool IsbookExisttoGet(Guid id);
 
         public void Removeavaliblebook(Guid id);
+        public void Addavaleblebook(Guid id);
     }
 }

@@ -24,9 +24,9 @@ namespace TamrinApi.Extensions
 
             return new bookDto(
                 book.ID,
-                book.titel,
+                book.title,
                 book.auther,
-                book.categoty,
+                book.category,
                 book.publishedYear,
                 book.totalCopies,
                 book.availabaleCopies
