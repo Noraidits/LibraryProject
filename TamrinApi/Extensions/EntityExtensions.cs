@@ -30,11 +30,9 @@ namespace TamrinApi.Extensions
                 book.publishedYear,
                 book.totalCopies,
                 book.availabaleCopies
-
             );
 
         }
-
     }
 }
 
