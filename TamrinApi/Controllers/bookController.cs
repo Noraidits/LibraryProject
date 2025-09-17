@@ -7,7 +7,7 @@ using TamrinApi.Models.DTOs;
 namespace TamrinApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class bookController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
@@ -16,62 +16,47 @@ namespace TamrinApi.Controllers
             _bookRepository = bookRepository;
         }
 
-        [HttpPost("addBook")]
-        public IActionResult addBook([FromBody] bookDto bookDto) {
-       
+        [HttpPost]
+        public IActionResult addBook([FromBody] bookDto bookDto)
+        {
+
+
             Book book = new Book(bookDto.titel, bookDto.auther, bookDto.categoty, bookDto.publishedYear, bookDto.totalCopies);
 
             _bookRepository.addBook(book);
             return Ok(book);
         }
-        [HttpPut("updateBook")]
-        public IActionResult updateBook([FromBody] Book book) {
-            if (_bookRepository.getBookById(book.ID) != null) {
-                _bookRepository.updateBook(book);
-                return Ok();
-            }
-            else return BadRequest("Id is not find");
-        } 
-        [HttpPut("removeCopy")]
-        public IActionResult addCopy(Guid ID, uint number)
+
+
+        [HttpGet]
+        public IActionResult GetAllBooks()
         {
-            if (_bookRepository.getBookById(ID) != null) {
-                _bookRepository.removeCopy(ID,number);
-                return Ok();
-            }
-            else return BadRequest("Id is not find");
+
+            var books = _bookRepository.getAllBooks();
+            return Ok(books);
+
         }
 
-        [HttpPut("addCopyBook")]
-
-        public IActionResult addcopy(Guid ID, uint number)
-        {
-            if (_bookRepository.getBookById(ID) != null) {
-                _bookRepository.addCopy(ID,number);
-                return Ok();
-            }
-            else return BadRequest("Id is not find");
-        }
-
-
-        [HttpGet("getById{id}")]
+        [HttpGet ("{BookId}")]
         public IActionResult getBookById(Guid id)
         {
             var book = _bookRepository.getBookById(id);
 
-            if (book == null) {
+            if (book == null)
+            {
                 return NotFound();
             }
 
             return Ok(book);
         }
 
-        [HttpGet("getByName{name}")]
+        [HttpGet("{BookName}")]
         public IActionResult getBookByname(string name)
         {
             var books = _bookRepository.getBookByName(name);
 
-            if (books == null) {
+            if (books == null)
+            {
                 return NotFound();
             }
 
@@ -79,16 +64,49 @@ namespace TamrinApi.Controllers
         }
 
 
-        [HttpGet("getAll")]
-        public IActionResult GetAllBooks()
+        [HttpPut]
+        public IActionResult updateBook([FromBody] Book book)
         {
-            var books = _bookRepository.getAllBooks();
-            return Ok(books);
+            if (_bookRepository.getBookById(book.ID) != null)
+            {
+                _bookRepository.updateBook(book);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
+        }
+        [HttpPut("removeCopy")]
+        public IActionResult addCopy(Guid ID, uint number)
+        {
+            if (_bookRepository.getBookById(ID) != null)
+            {
+                _bookRepository.removeCopy(ID, number);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
         }
 
+
         [HttpDelete("DeletByID")]
-        public IActionResult actionResult(Guid id) {
-            if(_bookRepository.getBookById(id) == null) return NoContent();
+
+        [HttpPut("addCopyBook")]
+
+        public IActionResult addcopy(Guid ID, uint number)
+        {
+            if (_bookRepository.getBookById(ID) != null)
+            {
+                _bookRepository.addCopy(ID, number);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
+        }
+
+
+
+        [HttpDelete]
+
+        public IActionResult actionResult(Guid id)
+        {
+            if (_bookRepository.getBookById(id) == null) return NoContent();
             _bookRepository.deleteBookById(id);
             return Ok();
         }

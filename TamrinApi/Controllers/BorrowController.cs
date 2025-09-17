@@ -2,7 +2,7 @@
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
-using TamrinApi.Servises;
+using TamrinApi.Servises.InterFace;
 
 namespace TamrinApi.Controllers
 {
@@ -22,7 +22,7 @@ namespace TamrinApi.Controllers
             _gettingBookService = gettingBookService;
         }
 
-        [HttpPost("PostBorrow")]
+        [HttpPost]
         public IActionResult AddBorrow(Guid Memberid, Guid Bookid)
         {
             _gettingBookService.GetBookByMember(Memberid, Bookid);
@@ -30,25 +30,25 @@ namespace TamrinApi.Controllers
             _borrowingRepository.addBorrow(borrowing);
             return Ok(borrowing);
         }
+        [HttpGet("All")]
+        public IActionResult GetAll()
+        {
+            return Ok(_borrowingRepository.GetAllborrowing());
+        }
 
-        [HttpGet("getbBarrowById")]
+        [HttpGet("{BorrowId}")]
         public IActionResult GetAll(Guid Id)
         {
             return Ok(_borrowingRepository.GetBorrowingByid(Id));
         }
 
-        [HttpPatch]
+        [HttpPatch("{BarrowId}/ReturnDate")]
         public IActionResult setReturnDate(Guid Id)
         {
             _borrowingRepository.updatereturndate(Id);
             return NoContent();
         }
 
-        [HttpGet("GetAll")]
-        public IActionResult GetAll()
-        {
-            return Ok(_borrowingRepository.GetAllborrowing());
-        }
 
     }
 }

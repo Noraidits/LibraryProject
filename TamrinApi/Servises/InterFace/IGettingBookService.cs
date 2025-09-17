@@ -1,4 +1,4 @@
-﻿namespace TamrinApi.Servises
+﻿namespace TamrinApi.Servises.InterFace
 {
     public interface IGettingBookService
     {
