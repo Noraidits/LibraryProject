@@ -17,7 +17,7 @@ namespace TamrinApi.Controllers
 
         public BorrowController(IBorrowingRepository borrowingRepository, IGettingBookService gettingBookService)
         {
-            
+
             _borrowingRepository = borrowingRepository;
             _gettingBookService = gettingBookService;
         }
@@ -34,9 +34,21 @@ namespace TamrinApi.Controllers
         [HttpGet("getbBarrowById")]
         public IActionResult GetAll(Guid Id)
         {
-
             return Ok(_borrowingRepository.GetBorrowingByid(Id));
-
         }
+
+        [HttpPatch]
+        public IActionResult setReturnDate(Guid Id)
+        {
+            _borrowingRepository.updatereturndate(Id);
+            return NoContent();
+        }
+
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            return Ok(_borrowingRepository.GetAllborrowing());
+        }
+
     }
 }

@@ -1,3 +1,4 @@
+using TamrinApi.Database;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
@@ -41,6 +42,15 @@ BorrowDatabase.borrowings.Add(borow);
 Console.WriteLine("book  "+book.ID);
 Console.WriteLine("member  "+member.id);
 Console.WriteLine("borow  " + borow.id);
+
+//after this line all of lines are for test excsept app.run
+Book book = new Book("harry poter", "jk rowling", "fantasy", 1999, 20);
+bookDataBase.books.Add(book);
+Member member = new Member("alireza Salimian", "alirza1385@gamil.com", "09226844631");
+MemberDataBase.members.Add(member);
+BorrowDatabase.borrowings.Add(new Borrowing(book.ID, member.id));
+
+
 
 app.Run();
 

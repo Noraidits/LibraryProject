@@ -27,11 +27,11 @@ namespace TamrinApi.Repositories
         }
 
 
-        public void updatereturndate(DateOnly returndaate,Guid id)
+        public void updatereturndate(Guid id)
         {
             var target = GetBorrowingByid(id);
 
-            target.returnDate = returndaate;
+            target.returnDate = DateOnly.FromDateTime(DateTime.Now);
         }
 
         public void addBorrow(Borrowing borrow)
@@ -45,6 +45,11 @@ namespace TamrinApi.Repositories
                          
             addBorrow(borrowing);
 
+        }
+
+        public IEnumerable<Borrowing> GetAllborrowing()
+        {
+            return Database.BorrowDatabase.borrowings; 
         }
     }
 }
