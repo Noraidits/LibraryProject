@@ -20,17 +20,21 @@ namespace TamrinApi.Controllers
         public IActionResult addBook([FromBody] bookDto bookDto)
         {
 
+
             Book book = new Book(bookDto.titel, bookDto.auther, bookDto.categoty, bookDto.publishedYear, bookDto.totalCopies);
 
             _bookRepository.addBook(book);
             return Ok(book);
         }
 
+
         [HttpGet]
         public IActionResult GetAllBooks()
         {
+
             var books = _bookRepository.getAllBooks();
             return Ok(books);
+
         }
 
         [HttpGet ("{BookId}")]
@@ -81,6 +85,9 @@ namespace TamrinApi.Controllers
             else return BadRequest("Id is not find");
         }
 
+
+        [HttpDelete("DeletByID")]
+
         [HttpPut("addCopyBook")]
 
         public IActionResult addcopy(Guid ID, uint number)
@@ -96,6 +103,7 @@ namespace TamrinApi.Controllers
 
 
         [HttpDelete]
+
         public IActionResult actionResult(Guid id)
         {
             if (_bookRepository.getBookById(id) == null) return NoContent();

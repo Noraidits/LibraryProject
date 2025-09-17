@@ -2,8 +2,9 @@
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
+using TamrinApi.Servises.InterFace;
 
-namespace TamrinApi.Servises
+namespace TamrinApi.Servises.models
 {
     public class GettingBookService : IGettingBookService
     {
