@@ -14,7 +14,7 @@ namespace TamrinApi.Models
             this.Password = Password;
         }
 
-        public string userName { get;private set; }
+        public string userName { get;private init; }
         public string Password { 
             set
             {
