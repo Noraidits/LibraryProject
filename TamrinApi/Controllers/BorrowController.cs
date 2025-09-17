@@ -2,7 +2,7 @@
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
-using TamrinApi.Servises;
+using TamrinApi.Servises.InterFace;
 
 namespace TamrinApi.Controllers
 {

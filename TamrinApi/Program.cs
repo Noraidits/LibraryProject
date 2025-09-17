@@ -1,8 +1,8 @@
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
-using TamrinApi.Servises;
 using TamrinApi.Database;
+using TamrinApi.Servises.models;
 using TamrinApi.Servises.InterFace;
 
 
