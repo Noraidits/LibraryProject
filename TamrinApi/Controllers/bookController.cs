@@ -7,7 +7,7 @@ using TamrinApi.Models.DTOs;
 namespace TamrinApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class bookController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
@@ -16,7 +16,7 @@ namespace TamrinApi.Controllers
             _bookRepository = bookRepository;
         }
 
-        [HttpPost("addBook")]
+        [HttpPost]
         public IActionResult addBook([FromBody] bookDto bookDto)
         {
 
@@ -25,7 +25,42 @@ namespace TamrinApi.Controllers
             _bookRepository.addBook(book);
             return Ok(book);
         }
-        [HttpPut("updateBook")]
+
+        [HttpGet]
+        public IActionResult GetAllBooks()
+        {
+            var books = _bookRepository.getAllBooks();
+            return Ok(books);
+        }
+
+        [HttpGet ("{BookId}")]
+        public IActionResult getBookById(Guid id)
+        {
+            var book = _bookRepository.getBookById(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(book);
+        }
+
+        [HttpGet("{BookName}")]
+        public IActionResult getBookByname(string name)
+        {
+            var books = _bookRepository.getBookByName(name);
+
+            if (books == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(books);
+        }
+
+
+        [HttpPut]
         public IActionResult updateBook([FromBody] Book book)
         {
             if (_bookRepository.getBookById(book.ID) != null)
@@ -59,41 +94,8 @@ namespace TamrinApi.Controllers
         }
 
 
-        [HttpGet("getById{id}")]
-        public IActionResult getBookById(Guid id)
-        {
-            var book = _bookRepository.getBookById(id);
 
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(book);
-        }
-
-        [HttpGet("getByName{name}")]
-        public IActionResult getBookByname(string name)
-        {
-            var books = _bookRepository.getBookByName(name);
-
-            if (books == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(books);
-        }
-
-
-        [HttpGet("getAll")]
-        public IActionResult GetAllBooks()
-        {
-            var books = _bookRepository.getAllBooks();
-            return Ok(books);
-        }
-
-        [HttpDelete("DeletByID")]
+        [HttpDelete]
         public IActionResult actionResult(Guid id)
         {
             if (_bookRepository.getBookById(id) == null) return NoContent();
