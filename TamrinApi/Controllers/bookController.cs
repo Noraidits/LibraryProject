@@ -85,9 +85,6 @@ namespace TamrinApi.Controllers
             else return BadRequest("Id is not find");
         }
 
-
-        [HttpDelete("DeletByID")]
-
         [HttpPut("addCopyBook")]
 
         public IActionResult addcopy(Guid ID, uint number)
