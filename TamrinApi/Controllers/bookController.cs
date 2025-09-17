@@ -17,7 +17,7 @@ namespace TamrinApi.Controllers
         }
 
         [HttpPost("addBook")]
-        public IActionResult addBook([FromBody] bookDto bookDto)
+        public IActionResult addBook([FromBody] bookDto bookDto) {
        
             Book book = new Book(bookDto.titel, bookDto.auther, bookDto.categoty, bookDto.publishedYear, bookDto.totalCopies);
 
