@@ -3,7 +3,7 @@ using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
 
-namespace TamrinApi.Servises
+namespace TamrinApi.Servises.InterFace
 {
     public class GettingBookService : IGettingBookService
     {
