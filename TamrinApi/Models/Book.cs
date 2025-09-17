@@ -4,7 +4,6 @@ namespace TamrinApi.Models
 {
     public class Book
     {
-
         public Book( string titel, string auther, string categoty, uint publishedYear, uint totalCopies)
         {
             if (nameChecker(titel))  throw new Exception("titel is not valid");

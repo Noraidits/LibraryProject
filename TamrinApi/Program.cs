@@ -1,3 +1,4 @@
+using TamrinApi.Database;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
@@ -42,6 +43,8 @@ BorrowDatabase.borrowings.Add(borow);
 Console.WriteLine("book  "+book.ID);
 Console.WriteLine("member  "+member.id);
 Console.WriteLine("borow  " + borow.id);
+
+
 
 app.Run();
 

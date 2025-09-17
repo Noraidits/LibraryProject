@@ -7,7 +7,7 @@ using TamrinApi.Models.DTOs;
 namespace TamrinApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MemberController : ControllerBase
     {
         private readonly IMemberRepository _memberRepository;
@@ -17,8 +17,7 @@ namespace TamrinApi.Controllers
             _memberRepository = memberRepository;
         }
 
-
-        [HttpPost("addMember")]
+        [HttpPost]
         public IActionResult AddMember([FromBody] createMember memberDto) {
 
             Member member = new Member(memberDto.fullName, memberDto.email,memberDto.phoneNumber);
@@ -26,37 +25,44 @@ namespace TamrinApi.Controllers
             _memberRepository.AddMember(member);
             return Ok(member);
         }
-        [HttpPut("addTOExoyeryDate")]
-        public IActionResult AddToAddTOExpieryDate( Guid Id)
-        {
-            _memberRepository.AddTOExpieryDate(Id);
-            return Created();
-        }
-        [HttpPut("updateMember")]
-        public IActionResult UpdateMember([FromBody] Member member,Guid id)
-        {
 
-            _memberRepository.UpdateMember(member,id);
-            return Ok();
-        }
-        [HttpGet("getAll")]
-
+        [HttpGet]
         public IActionResult GetAll()
         {
             {
                 return Ok(_memberRepository.GetAllMembers().Select(Member => Member.AsDto()));
             }
         }
-        [HttpGet("byID{id}")]
+
+        [HttpGet("{id}")]
         public IActionResult Getbyid(Guid id)
         {
             return Ok(_memberRepository.GetMemberById(id));
         }
-        [HttpGet("getActiveBookCount{Id}")]
-        public IActionResult getBookCount(Guid Id)
+
+        [HttpPut("{Id}/ExpieryDate")]
+        public IActionResult AddToAddTOExpieryDate(Guid Id)
         {
-            return Ok(_memberRepository.getActiveBookCount(Id));
+            _memberRepository.AddTOExpieryDate(Id);
+            return Created();
         }
+
+        [HttpPut]   
+        public IActionResult UpdateMember([FromBody] Member member,Guid id)
+        {
+            _memberRepository.UpdateMember(member,id);
+            return Ok();
+        }
+
+
+        
+        
+
+        //[HttpGet("getActiveBookCount{Id}")]
+        //public IActionResult getBookCount(Guid Id)
+        //{
+        //    return Ok(_memberRepository.getActiveBookCount(Id));
+        //}
 
   
         [HttpDelete]

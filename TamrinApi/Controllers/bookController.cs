@@ -7,7 +7,7 @@ using TamrinApi.Models.DTOs;
 namespace TamrinApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class bookController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
@@ -16,17 +16,59 @@ namespace TamrinApi.Controllers
             _bookRepository = bookRepository;
         }
 
-        [HttpPost("addBook")]
+        [HttpPost]
         public IActionResult addBook([FromBody] bookDto bookDto)
         {
+
+
             Book book = new Book(bookDto.titel, bookDto.auther, bookDto.categoty, bookDto.publishedYear, bookDto.totalCopies);
+
             _bookRepository.addBook(book);
             return Ok(book);
         }
-        [HttpPut("updateBook")]
-        public IActionResult updateBook(Book book)
+
+
+        [HttpGet]
+        public IActionResult GetAllBooks()
         {
-            if (_bookRepository.getBookById(book.ID) != null) {
+
+            var books = _bookRepository.getAllBooks();
+            return Ok(books);
+
+        }
+
+        [HttpGet ("{BookId}")]
+        public IActionResult getBookById(Guid id)
+        {
+            var book = _bookRepository.getBookById(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(book);
+        }
+
+        [HttpGet("{BookName}")]
+        public IActionResult getBookByname(string name)
+        {
+            var books = _bookRepository.getBookByName(name);
+
+            if (books == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(books);
+        }
+
+
+        [HttpPut]
+        public IActionResult updateBook([FromBody] Book book)
+        {
+            if (_bookRepository.getBookById(book.ID) != null)
+            {
                 _bookRepository.updateBook(book);
                 return Ok();
             }
@@ -35,18 +77,23 @@ namespace TamrinApi.Controllers
         [HttpPut("removeCopy")]
         public IActionResult addCopy(Guid ID, uint number)
         {
-            if (_bookRepository.getBookById(ID) != null) {
+            if (_bookRepository.getBookById(ID) != null)
+            {
                 _bookRepository.removeCopy(ID, number);
                 return Ok();
             }
             else return BadRequest("Id is not find");
         }
 
+
+        [HttpDelete("DeletByID")]
+
         [HttpPut("addCopyBook")]
 
         public IActionResult addcopy(Guid ID, uint number)
         {
-            if (_bookRepository.getBookById(ID) != null) {
+            if (_bookRepository.getBookById(ID) != null)
+            {
                 _bookRepository.addCopy(ID, number);
                 return Ok();
             }
@@ -54,39 +101,9 @@ namespace TamrinApi.Controllers
         }
 
 
-        [HttpGet("getById{id}")]
-        public IActionResult getBookById(Guid id)
-        {
-            var book = _bookRepository.getBookById(id);
 
-            if (book == null) {
-                return NotFound();
-            }
+        [HttpDelete]
 
-            return Ok(book);
-        }
-
-        [HttpGet("getByName{name}")]
-        public IActionResult getBookByname(string name)
-        {
-            var books = _bookRepository.getBookByName(name);
-
-            if (books == null) {
-                return NotFound();
-            }
-
-            return Ok(books);
-        }
-
-
-        [HttpGet("getAll")]
-        public IActionResult GetAllBooks()
-        {
-            var books = _bookRepository.getAllBooks();
-            return Ok(books);
-        }
-
-        [HttpDelete("DeletByID")]
         public IActionResult actionResult(Guid id)
         {
             if (_bookRepository.getBookById(id) == null) return NoContent();
