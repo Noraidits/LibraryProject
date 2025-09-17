@@ -27,7 +27,7 @@ namespace TamrinApi.Controllers
             return Ok(member);
         }
         [HttpPut("addTOExoyeryDate")]
-        public IActionResult AddToAddTOExpieryDate( Guid Id)
+        public IActionResult AddToAddTOExpieryDate(Guid Id)
         {
             _memberRepository.AddTOExpieryDate(Id);
             return Created();
@@ -35,12 +35,11 @@ namespace TamrinApi.Controllers
         [HttpPut("updateMember")]
         public IActionResult UpdateMember([FromBody] Member member,Guid id)
         {
-
             _memberRepository.UpdateMember(member,id);
             return Ok();
         }
-        [HttpGet("getAll")]
 
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
             {
@@ -52,11 +51,12 @@ namespace TamrinApi.Controllers
         {
             return Ok(_memberRepository.GetMemberById(id));
         }
-        [HttpGet("getActiveBookCount{Id}")]
-        public IActionResult getBookCount(Guid Id)
-        {
-            return Ok(_memberRepository.getActiveBookCount(Id));
-        }
+
+        //[HttpGet("getActiveBookCount{Id}")]
+        //public IActionResult getBookCount(Guid Id)
+        //{
+        //    return Ok(_memberRepository.getActiveBookCount(Id));
+        //}
 
   
         [HttpDelete]
