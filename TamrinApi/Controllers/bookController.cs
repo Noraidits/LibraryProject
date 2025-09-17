@@ -18,25 +18,29 @@ namespace TamrinApi.Controllers
 
         [HttpPost("addBook")]
         public IActionResult addBook([FromBody] bookDto bookDto)
-       
+        {
+
             Book book = new Book(bookDto.titel, bookDto.auther, bookDto.categoty, bookDto.publishedYear, bookDto.totalCopies);
 
             _bookRepository.addBook(book);
             return Ok(book);
         }
         [HttpPut("updateBook")]
-        public IActionResult updateBook([FromBody] Book book) {
-            if (_bookRepository.getBookById(book.ID) != null) {
+        public IActionResult updateBook([FromBody] Book book)
+        {
+            if (_bookRepository.getBookById(book.ID) != null)
+            {
                 _bookRepository.updateBook(book);
                 return Ok();
             }
             else return BadRequest("Id is not find");
-        } 
+        }
         [HttpPut("removeCopy")]
         public IActionResult addCopy(Guid ID, uint number)
         {
-            if (_bookRepository.getBookById(ID) != null) {
-                _bookRepository.removeCopy(ID,number);
+            if (_bookRepository.getBookById(ID) != null)
+            {
+                _bookRepository.removeCopy(ID, number);
                 return Ok();
             }
             else return BadRequest("Id is not find");
@@ -46,8 +50,9 @@ namespace TamrinApi.Controllers
 
         public IActionResult addcopy(Guid ID, uint number)
         {
-            if (_bookRepository.getBookById(ID) != null) {
-                _bookRepository.addCopy(ID,number);
+            if (_bookRepository.getBookById(ID) != null)
+            {
+                _bookRepository.addCopy(ID, number);
                 return Ok();
             }
             else return BadRequest("Id is not find");
@@ -59,7 +64,8 @@ namespace TamrinApi.Controllers
         {
             var book = _bookRepository.getBookById(id);
 
-            if (book == null) {
+            if (book == null)
+            {
                 return NotFound();
             }
 
@@ -71,7 +77,8 @@ namespace TamrinApi.Controllers
         {
             var books = _bookRepository.getBookByName(name);
 
-            if (books == null) {
+            if (books == null)
+            {
                 return NotFound();
             }
 
@@ -87,8 +94,9 @@ namespace TamrinApi.Controllers
         }
 
         [HttpDelete("DeletByID")]
-        public IActionResult actionResult(Guid id) {
-            if(_bookRepository.getBookById(id) == null) return NoContent();
+        public IActionResult actionResult(Guid id)
+        {
+            if (_bookRepository.getBookById(id) == null) return NoContent();
             _bookRepository.deleteBookById(id);
             return Ok();
         }
