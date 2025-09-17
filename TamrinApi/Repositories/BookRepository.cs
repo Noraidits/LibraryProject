@@ -31,10 +31,10 @@ public class BookRepository : IBookRepository
     {
         var target = getBookById(book.ID);
         if (target != null) {
-            target.title = book.title;
-            target.auther = book.auther;
-            target.category = book.category;
-            target.publishedYear = book.publishedYear;
+            //target.title = book.title;
+            //target.auther = book.auther;
+            //target.category = book.category;
+            //target.publishedYear = book.publishedYear;
             target.totalCopies = book.totalCopies;
             target.availabaleCopies = book.availabaleCopies;
         }
@@ -61,7 +61,7 @@ public class BookRepository : IBookRepository
     {
         var target = getBookById(id);
 
-        return target != null && target.availabaleCopies > 0;
+        return target != null &&( target.availabaleCopies > 0);
         
     }
 

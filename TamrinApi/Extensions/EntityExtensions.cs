@@ -17,6 +17,7 @@ namespace TamrinApi.Extensions
             member.expiryDate,
             member.isActive,
             member.ActiveBook
+
             );
         }
         public static bookDto AsDto(this Book book)

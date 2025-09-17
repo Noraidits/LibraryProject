@@ -11,12 +11,12 @@
             this.shouldReturnDate = ShouldReturnDate(borrowDate);
         }
 
-        public Guid id { get; private set; }
-        public Guid bookid { get; init; }
-        public Guid memberid { get; init; }
-        public DateOnly borrowDate { get; init; }
-        public DateOnly shouldReturnDate { get; init; }
-        public DateOnly returnDate { get; set; }
+        public Guid id { get; private init; }
+        public Guid bookid { get;private init; }
+        public Guid memberid { get;private init; }
+        public DateOnly borrowDate { get;private init;}
+        public DateOnly shouldReturnDate { get; private init; }
+        public DateOnly returnDate { get;/*private*/ set; }
 
         public DateOnly MaxBrrowingDate => this.borrowDate.AddDays(14);
 
@@ -24,5 +24,10 @@
         {
             return boorrowDate.AddDays(14);
         }
+        public void returnDateSeter()
+        {
+            this.returnDate =DateOnly.FromDateTime(DateTime.Now);
+        }
+        
     }
 }

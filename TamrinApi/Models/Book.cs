@@ -20,13 +20,13 @@ namespace TamrinApi.Models
             this.availabaleCopies = totalCopies;
         }
 
-        public Guid ID  { get; private set; }
-        public string title { get; set; }
-        public string auther { get; set; }
-        public string category { get; set; }
-        public uint publishedYear { get; set; }
-        public uint totalCopies { get; set; }
-        public uint availabaleCopies { get; set; }
+        public Guid ID  { get; private init; }
+        public string title { get;private init; }
+        public string auther { get; private init; }
+        public string category { get; private init; }
+        public uint publishedYear { get; private init; } 
+        public uint totalCopies { get;/*private*/ set; }
+        public uint availabaleCopies { get;/*private*/  set; }
 
         private bool nameChecker(string name)
         {
@@ -34,8 +34,23 @@ namespace TamrinApi.Models
             return !Regex.IsMatch(name, pattern);
         }
 
-
-
-
+        public void addTotaleCopies(uint aded)
+        {
+            this.totalCopies+= aded;
+        }
+        public void RemoveTotaleCopies(uint aded)
+        {
+            if (aded > this.totalCopies) throw new Exception("toatlCopies cant be smaller then 0");
+            this.totalCopies -= aded;
+        }
+        public void addToAvailabalCopies()
+        {
+            this.availabaleCopies++;
+        }
+        public void removeFromAvailabalCopies()
+        {
+            if (this.availabaleCopies == 0) throw new Exception("availabal copies cant be smaller then 0");
+            this.availabaleCopies--;
+        }
     }
 }

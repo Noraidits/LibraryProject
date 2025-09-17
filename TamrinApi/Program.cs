@@ -3,6 +3,8 @@ using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
 using TamrinApi.Servises;
+using TamrinApi.Database;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,16 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+//after this line all of lines are for test excsept app.run
+var book = new Book("harry poter", "jk rowling", "fantasy", 1999, 20);
+bookDataBase.books.Add(book);
+var member = new Member("Alireza Salimian", "alirza1385@gamil.com", "09226844631");
+MemberDataBase.members.Add(member);
+var borow = new Borrowing(book.ID, member.id);
+BorrowDatabase.borrowings.Add(borow);
+Console.WriteLine("book  "+book.ID);
+Console.WriteLine("member  "+member.id);
+Console.WriteLine("borow  " + borow.id);
 
 //after this line all of lines are for test excsept app.run
 Book book = new Book("harry poter", "jk rowling", "fantasy", 1999, 20);
@@ -41,3 +53,4 @@ BorrowDatabase.borrowings.Add(new Borrowing(book.ID, member.id));
 
 
 app.Run();
+

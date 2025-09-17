@@ -1,4 +1,6 @@
 ﻿using TamrinApi.Models;
+using TamrinApi.Servises;
+using TamrinApi.Models;
 
 namespace TamrinApi.Database
 {

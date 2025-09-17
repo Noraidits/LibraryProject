@@ -44,7 +44,7 @@ namespace TamrinApi.Repositories
             target.email = member.email;
             target.phoneNumber = member.phoneNumber;
             target.fullName = member.fullName;
-           // target.ActiveBook = member.ActiveBook;
+            // target.ActiveBook = member.ActiveBook;
             //target.isActive = member.isActive;
 
         }
