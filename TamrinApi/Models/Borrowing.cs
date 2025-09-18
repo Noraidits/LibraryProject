@@ -2,6 +2,7 @@
 {
     public class Borrowing
     {
+        public Borrowing() { }
         public Borrowing(Guid bookid, Guid memberid)
         {
             this.id = Guid.NewGuid();

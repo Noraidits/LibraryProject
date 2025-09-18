@@ -6,7 +6,7 @@ namespace TamrinApi.Models
     {
         private List<Borrowing> _Borrows= new List<Borrowing>();
 
-
+        private Member() : base("", "", "") { }
         public Member(string fullName, string email, string phoneNumber) : base(fullName, email, phoneNumber)
         { 
 

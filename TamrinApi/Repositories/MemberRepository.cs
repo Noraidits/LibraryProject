@@ -1,52 +1,61 @@
-﻿using TamrinApi.Interfaces;
-using TamrinApi.Models;
-using TamrinApi.Database;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
+using TamrinApi.Database;
+using TamrinApi.DatabaseConnection;
+using TamrinApi.Interfaces;
+using TamrinApi.Models;
 
 namespace TamrinApi.Repositories
 {
     public class MemberRepository : IMemberRepository
     {
-        public Member? GetMemberById(Guid id)
+        private readonly ApplicationDBContext _context;
+        public MemberRepository(ApplicationDBContext context)
         {
-            return MemberDataBase.members.SingleOrDefault(c => c.id == id);
-        }
-        public void AddMember(Member member)
-        {
-            MemberDataBase.members.Add(member);
+            _context = context;
         }
 
-        public void AddTOExpieryDate(Guid id)
+        public async Task<Member?> GetMemberById(Guid MemberId)
         {
-            var target = GetMemberById(id);
-            if (target == null) throw new Exception("your member is not exist");
-            if (!target.isActive)
+            return await _context.Members.FirstOrDefaultAsync(k => k.id == MemberId);
+        }
+        public async Task AddMember(Member member)
+        {
+            await _context.Members.AddAsync(member);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddTOExpieryDate(Guid id)
+        {
+            var target = await GetMemberById(id);
+
+            if (target != null && target.isActive)
             {
                 target.expiryDate = DateOnly.FromDateTime(DateTime.Now).AddDays(180);
+                await _context.SaveChangesAsync();
             }
+
         }
 
-        public IEnumerable<Member> GetAllMembers()
+        public async Task<IEnumerable<Member>> GetAllMembers()
         {
-            return MemberDataBase.members;
+            return await _context.Members.ToListAsync();
         }
 
 
-        public IEnumerable<Member> GetMembersByName(string Name)
+        public async Task<IEnumerable<Member>> GetMembersByName(string Name)
         {
-            IEnumerable<Member> result = MemberDataBase.members.Where(M => M.fullName.Contains(Name));
-            return result;
+            return await _context.Members
+                .Where(k => k.fullName.Contains(Name))
+                .ToListAsync();
         }
 
-        public void UpdateMember(Member member, Guid id)
+        public async Task UpdateMember(Member member, Guid id)
         {
-            var target = GetMemberById(id);
-            if (target == null) throw new Exception("your member is not exist");
-            target.email = member.email;
-            target.phoneNumber = member.phoneNumber;
-            target.fullName = member.fullName;
-            // target.ActiveBook = member.ActiveBook;
-            //target.isActive = member.isActive;
+            var target = await GetMemberById(id);
+
+            _context.Members.Update(member);
+            await _context.SaveChangesAsync();
 
         }
 
@@ -59,46 +68,55 @@ namespace TamrinApi.Repositories
             member.RemoveBorrow(BorrowId);
         }
 
-        //public void AddBorrow(Member member, Borrowing borow)
-        //{
-        //    member.AddBorrow(borow);
-        //}
-
-        public void DeleteMemberById(Guid id)
+        public async Task DeleteMemberById(Guid id)
         {
-            var target = GetMemberById(id);
-            MemberDataBase.members.Remove(target);
+            var target = await GetMemberById(id);
+            if (target != null)
+            {
+                _context.Members.Remove(target);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public bool IsmemberActive(Guid Id)
+        public async Task<bool> IsmemberActive(Guid Id)
         {
-            var target = GetMemberById(Id);
+            var target = await GetMemberById(Id);
+            if (target != null && target.isActive) return true;
+            else return false;
 
-            return target.isActive;
         }
 
-        public void addActiveBook(Guid id)
+        public async Task addActiveBook(Guid id)
         {
-            var target = GetMemberById(id);
-            target.ActiveBook++;
+            var target = await GetMemberById(id);
+            if (target != null)
+            {
+                target.ActiveBook++;
+                await _context.SaveChangesAsync();
+            }
+
         }
 
-        public void removeActiveBook(Guid id)
+        public async Task removeActiveBook(Guid id)
         {
-            var target = GetMemberById(id);
-            target.ActiveBook--;
+            var target = await GetMemberById(id);
+            if (target != null)
+            {
+                target.ActiveBook--;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public uint getActiveBookCount(Guid Id)
+        public async Task<uint> getActiveBookCount(Guid Id)
         {
-            var target = GetMemberById(Id);
-
+            var target =await GetMemberById(Id);
             return target.ActiveBook;
+            
         }
 
-        public bool memberCanBorrow(Guid Id)
+        public async Task<bool> memberCanBorrow(Guid Id)
         {
-            var target = GetMemberById(Id);
+            var target = await GetMemberById(Id);
 
             if (!target.isActive)
             {
