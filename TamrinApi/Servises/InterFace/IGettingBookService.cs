@@ -2,6 +2,6 @@
 {
     public interface IGettingBookService
     {
-        void GetBookByMember(Guid memberId, Guid bookid);
+        Task GetBookByMember(Guid memberId, Guid bookid);
     }
 }

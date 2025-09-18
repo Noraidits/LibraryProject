@@ -5,17 +5,17 @@ namespace TamrinApi.Interfaces
 {
     public interface IMemberRepository
     {
-        Member? GetMemberById(Guid id);
-        IEnumerable<Member>? GetMembersByName(string Name);
-        IEnumerable<Member> GetAllMembers();
-        void DeleteMemberById(Guid id);
-        void AddMember(Member member);
-        void UpdateMember(Member member, Guid id);
-        void AddTOExpieryDate (Guid id);
-        bool IsmemberActive(Guid Id);
-        void addActiveBook(Guid id);
-        void removeActiveBook(Guid id);
-        uint getActiveBookCount(Guid Id);
-        bool memberCanBorrow(Guid Id);
+        Task<Member?> GetMemberById(Guid id);
+        Task<IEnumerable<Member>> GetMembersByName(string Name);
+        Task<IEnumerable<Member>> GetAllMembers();
+        Task DeleteMemberById(Guid id);
+        Task AddMember(Member member);
+        Task UpdateMember(Member member, Guid id);
+        Task AddTOExpieryDate (Guid id);
+        Task<bool> IsmemberActive(Guid Id);
+        Task addActiveBook(Guid id);
+        Task removeActiveBook(Guid id);
+        Task<uint> getActiveBookCount(Guid Id);
+        Task<bool> memberCanBorrow(Guid Id);
     }
 }

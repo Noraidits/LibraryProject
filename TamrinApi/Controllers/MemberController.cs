@@ -18,9 +18,10 @@ namespace TamrinApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMember([FromBody] createMember memberDto) {
+        public IActionResult AddMember([FromBody] createMember memberDto)
+        {
 
-            Member member = new Member(memberDto.fullName, memberDto.email,memberDto.phoneNumber);
+            Member member = new Member(memberDto.fullName, memberDto.email, memberDto.phoneNumber);
 
             _memberRepository.AddMember(member);
             return Ok(member);
@@ -30,7 +31,7 @@ namespace TamrinApi.Controllers
         public IActionResult GetAll()
         {
             {
-                return Ok(_memberRepository.GetAllMembers().Select(Member => Member.AsDto()));
+                return Ok(_memberRepository.GetAllMembers());
             }
         }
 
@@ -47,29 +48,20 @@ namespace TamrinApi.Controllers
             return Created();
         }
 
-        [HttpPut]   
-        public IActionResult UpdateMember([FromBody] Member member,Guid id)
+        [HttpPut]
+        public IActionResult UpdateMember([FromBody] Member member, Guid id)
         {
-            _memberRepository.UpdateMember(member,id);
+            _memberRepository.UpdateMember(member, id);
             return Ok();
         }
 
 
-        
-        
-
-        //[HttpGet("getActiveBookCount{Id}")]
-        //public IActionResult getBookCount(Guid Id)
-        //{
-        //    return Ok(_memberRepository.getActiveBookCount(Id));
-        //}
-
-  
         [HttpDelete]
-        public IActionResult deleteById(Guid id) {
+        public IActionResult deleteById(Guid id)
+        {
             if (_memberRepository.GetMemberById(id) == null) return NoContent();
             _memberRepository.DeleteMemberById(id);
-            return Ok(); 
+            return Ok();
         }
     }
 }

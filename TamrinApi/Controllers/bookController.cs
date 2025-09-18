@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Models.DTOs;
@@ -17,7 +18,7 @@ namespace TamrinApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult addBook([FromBody] bookDto bookDto)
+        public IActionResult addBook([FromBody] PostBookDto bookDto)
         {
 
 
@@ -29,18 +30,18 @@ namespace TamrinApi.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllBooks()
+        public async Task<IActionResult> GetAllBooks()
         {
 
-            var books = _bookRepository.getAllBooks();
+            var books = await _bookRepository.getAllBooks();
             return Ok(books);
 
         }
 
-        [HttpGet ("{BookId}")]
-        public IActionResult getBookById(Guid id)
+        [HttpGet("{BookId}")]
+        public async Task<IActionResult> getBookById(Guid id)
         {
-            var book = _bookRepository.getBookById(id);
+            var book = await _bookRepository.getBookById(id);
 
             if (book == null)
             {
@@ -51,9 +52,9 @@ namespace TamrinApi.Controllers
         }
 
         [HttpGet("{BookName}")]
-        public IActionResult getBookByname(string name)
+        public async Task<IActionResult> getBookByname(string name)
         {
-            var books = _bookRepository.getBookByName(name);
+            var books = await _bookRepository.getBookByName(name);
 
             if (books == null)
             {
@@ -65,30 +66,29 @@ namespace TamrinApi.Controllers
 
 
         [HttpPut]
-        public IActionResult updateBook([FromBody] Book book)
+        public async Task<IActionResult> updateBook([FromBody] UpdateBookDto book)
         {
-            if (_bookRepository.getBookById(book.ID) != null)
+            if (await _bookRepository.getBookById(book.bookId) != null)
             {
-                _bookRepository.updateBook(book);
-                return Ok();
-            }
-            else return BadRequest("Id is not find");
-        }
-        [HttpPut("removeCopy")]
-        public IActionResult addCopy(Guid ID, uint number)
-        {
-            if (_bookRepository.getBookById(ID) != null)
-            {
-                _bookRepository.removeCopy(ID, number);
+                await _bookRepository.updateBook(book);
                 return Ok();
             }
             else return BadRequest("Id is not find");
         }
 
 
-        [HttpDelete("DeletByID")]
+        [HttpPut("{AvalibleCopy}/add")]
+        public async Task<IActionResult> addCopy(Guid ID, uint number)
+        {
+            if (await _bookRepository.getBookById(ID) != null)
+            {
+                await _bookRepository.removeCopy(ID, number);
+                return Ok();
+            }
+            else return BadRequest("Id is not find");
+        }
 
-        [HttpPut("addCopyBook")]
+        [HttpPut("{AvalibleCopy}/remove")]
 
         public IActionResult addcopy(Guid ID, uint number)
         {
@@ -104,7 +104,7 @@ namespace TamrinApi.Controllers
 
         [HttpDelete]
 
-        public IActionResult actionResult(Guid id)
+        public IActionResult DeleteBook(Guid id)
         {
             if (_bookRepository.getBookById(id) == null) return NoContent();
             _bookRepository.deleteBookById(id);
