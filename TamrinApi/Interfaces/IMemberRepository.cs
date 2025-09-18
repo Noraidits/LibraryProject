@@ -17,5 +17,7 @@ namespace TamrinApi.Interfaces
         Task removeActiveBook(Guid id);
         Task<uint> getActiveBookCount(Guid Id);
         Task<bool> memberCanBorrow(Guid Id);
+        Task AddBorrow(Member member, Borrowing borrow);
+        Task RemoveBorrow(Member member, Guid borrowId);
     }
 }
