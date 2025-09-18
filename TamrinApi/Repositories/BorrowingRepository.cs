@@ -1,5 +1,7 @@
 ﻿using System.Net;
+using Microsoft.EntityFrameworkCore;
 using TamrinApi.Database;
+using TamrinApi.DatabaseConnection;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 
@@ -7,49 +9,58 @@ namespace TamrinApi.Repositories
 {
     public class BorrowingRepository : IBorrowingRepository
     {
-        
-
-        public Borrowing? GetBorrowingByid(Guid id)
+        private readonly ApplicationDBContext _context;
+        public BorrowingRepository(ApplicationDBContext context)
         {
-            return BorrowDatabase.borrowings.SingleOrDefault(c => c.id == id);
-        }
-
-        public IEnumerable<Borrowing> GetBorrowByBook(Guid boookid)
-        {
-            IEnumerable<Borrowing> result = BorrowDatabase.borrowings.Where(c => c.bookid == boookid);
-            return result;
-        }
-
-        public IEnumerable<Borrowing> GetBorrowByMember(Guid memberid)
-        {
-            IEnumerable<Borrowing> result = BorrowDatabase.borrowings.Where(c => c.memberid == memberid);
-            return result;
+            _context = context;
         }
 
 
-        public void updatereturndate(Guid id)
+        public async Task<Borrowing?> GetBorrowingByid(Guid id)
         {
-            var target = GetBorrowingByid(id);
-
-            target.returnDate = DateOnly.FromDateTime(DateTime.Now);
+            return await _context.Borrowings.FirstOrDefaultAsync(b => b.id == id);
         }
 
-        public void addBorrow(Borrowing borrow)
+        public async Task<IEnumerable<Borrowing>> GetBorrowByBook(Guid boookid)
         {
-            Database.BorrowDatabase.borrowings.Add(borrow);
+            return await _context.Borrowings.Where(c => c.bookid == boookid).ToListAsync();
         }
 
-        public void AddborrowingForservice(Guid memberId, Guid bookId)
+        public async Task<IEnumerable<Borrowing>> GetBorrowByMember(Guid memberid)
+        {
+            return await _context.Borrowings.Where(c => c.memberid == memberid).ToListAsync();
+        }
+
+
+        public async Task updatereturndate(Guid id)
+        {
+            var target = await GetBorrowingByid(id);
+            
+            if(target != null && target.returnDate == DateOnly.MinValue)
+            {
+                target.returnDate = DateOnly.FromDateTime(DateTime.Now);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task addBorrow(Borrowing borrow)
+        {
+            await _context.Borrowings.AddAsync(borrow);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddborrowingForservice(Guid memberId, Guid bookId)
         {
             Borrowing borrowing = new Borrowing(bookId, memberId);
                          
-            addBorrow(borrowing);
+            await addBorrow(borrowing);
+            await _context.SaveChangesAsync();
 
         }
 
-        public IEnumerable<Borrowing> GetAllborrowing()
+        public async Task<IEnumerable<Borrowing>> GetAllborrowing()
         {
-            return Database.BorrowDatabase.borrowings; 
+            return await _context.Borrowings.ToListAsync();
         }
     }
 }

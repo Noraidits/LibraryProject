@@ -10,14 +10,18 @@
          uint totalCopies,
          uint availabaleCopies
     );
-    public record getBookDto(
-        Guid ID,
+    public record PostBookDto(
         string titel,
         string auther,
         string categoty,
         uint publishedYear,
-        uint totalCopies,
-        uint availabaleCopies
+        uint totalCopies
    );
+    public record UpdateBookDto(
+        Guid bookId,
+        uint totalCopies
+        );
+
+
 }
 

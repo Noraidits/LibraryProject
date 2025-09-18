@@ -5,6 +5,8 @@ using TamrinApi.Repositories;
 using TamrinApi.Database;
 using TamrinApi.Servises.models;
 using TamrinApi.Servises.InterFace;
+using TamrinApi.DatabaseConnection;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,15 +40,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 //after this line all of lines are for test excsept app.run
-var book = new Book("harry poter", "jk rowling", "fantasy", 1999, 20);
-bookDataBase.books.Add(book);
-var member = new Member("Alireza Salimian", "alirza1385@gamil.com", "09226844631");
-MemberDataBase.members.Add(member);
-var borow = new Borrowing(book.ID, member.id);
-BorrowDatabase.borrowings.Add(borow);
-Console.WriteLine("book  "+book.ID);
-Console.WriteLine("member  "+member.id);
-Console.WriteLine("borow  " + borow.id);
+
+//var book = new Book("harry poter", "jk rowling", "fantasy", 1999, 20);
+//bookDataBase.books.Add(book);
+//var member = new Member("Alireza Salimian", "alirza1385@gamil.com", "09226844631");
+//MemberDataBase.members.Add(member);
+//var borow = new Borrowing(book.ID, member.id);
+//BorrowDatabase.borrowings.Add(borow);
+//Console.WriteLine("book  "+book.ID);
+//Console.WriteLine("member  "+member.id);
+//Console.WriteLine("borow  " + borow.id);
 
 
 
