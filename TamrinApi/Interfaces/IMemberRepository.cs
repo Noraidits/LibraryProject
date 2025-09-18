@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlTypes;
 using TamrinApi.Models;
+using TamrinApi.Servises.InterFace;
 
 namespace TamrinApi.Interfaces
 {

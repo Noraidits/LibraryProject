@@ -59,6 +59,15 @@ namespace TamrinApi.Repositories
 
         }
 
+        public void AddBorrow(Member member, Borrowing borow)
+        {
+            member.AddBorrow(borow);
+        }
+        public void RemoveBorrow(Member member, Guid BorrowId)
+        {
+            member.RemoveBorrow(BorrowId);
+        }
+
         public async Task DeleteMemberById(Guid id)
         {
             var target = await GetMemberById(id);
@@ -115,6 +124,7 @@ namespace TamrinApi.Repositories
             }
             else if (DateOnly.FromDateTime(DateTime.Now) >= target.expiryDate)
             {
+                target.changeIsActive(false);
                 return false;
             }
             else if (target.ActiveBook >= 5)

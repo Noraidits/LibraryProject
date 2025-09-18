@@ -1,4 +1,6 @@
-﻿namespace TamrinApi.Servises.InterFace
+﻿using TamrinApi.Models;
+
+namespace TamrinApi.Servises.InterFace
 {
     public interface IGettingBookService
     {

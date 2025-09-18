@@ -23,10 +23,10 @@ namespace TamrinApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBorrow(Guid Memberid, Guid Bookid)
+        public IActionResult AddBorrow(Guid Memberid, Guid Bookid,Borrowing borrowing)
         {
-            _gettingBookService.GetBookByMember(Memberid, Bookid);
-            Borrowing borrowing = new Borrowing(Memberid, Bookid);
+            _gettingBookService.GetBookByMember(Memberid, Bookid,borrowing);
+            //Borrowing borrowing = new Borrowing(Memberid, Bookid);
             _borrowingRepository.addBorrow(borrowing);
             return Ok(borrowing);
         }

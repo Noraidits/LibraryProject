@@ -11,10 +11,14 @@ namespace TamrinApi.Servises.models
     {
         private IMemberRepository _member;
         private IBookRepository _book;
-        public GettingBookService(IMemberRepository member, IBookRepository book)
+        private IBorrowingRepository _borrowing;
+        
+        public GettingBookService(IMemberRepository member, IBookRepository book, IBorrowingRepository borrowing )
         {
             _member = member;
             _book = book;
+            _borrowing = borrowing;
+            
         }
 
         public async Task GetBookByMember(Guid memberId, Guid bookid)

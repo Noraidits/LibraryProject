@@ -36,7 +36,7 @@ namespace TamrinApi.Models
         //{   if (ActiveBook == 0) throw new Exception("Active book cant be negetive");
         //    this.ActiveBook--;
         //}
-        public void ActiveBOOks()
+        public void ActiveBooks()
         {
             this.ActiveBook =(uint) _Borrows.Count();
         }
@@ -44,7 +44,8 @@ namespace TamrinApi.Models
         public void AddBorrow(Borrowing borow)
         {
             if (_Borrows.Count() > 5) throw new Exception("you can have more then 5 book");
-            _Borrows.Add(borow);
+                _Borrows.Add(borow);
+            ActiveBooks();
         }
 
         public void RemoveBorrow(Guid BorrowId)
@@ -53,6 +54,7 @@ namespace TamrinApi.Models
 
             if (borrow is not null)
                 _Borrows.Remove(borrow);
+            ActiveBooks();
         }
 
     }
