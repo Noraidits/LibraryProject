@@ -53,7 +53,7 @@ namespace TamrinApi.Repositories
         public async Task UpdateMember(Member member, Guid id)
         {
             var target = await GetMemberById(id);
-
+            if (target == null) throw new Exception("your member is not exist");
             _context.Members.Update(member);
             await _context.SaveChangesAsync();
 
