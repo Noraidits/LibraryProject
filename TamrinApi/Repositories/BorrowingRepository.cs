@@ -30,8 +30,9 @@ namespace TamrinApi.Repositories
         public void updatereturndate(Guid id)
         {
             var target = GetBorrowingByid(id);
+            if (target == null) throw new Exception("you didnt have that borowing");
 
-            target.returnDate = DateOnly.FromDateTime(DateTime.Now);
+            target.returnDateSeter();
         }
 
         public void addBorrow(Borrowing borrow)

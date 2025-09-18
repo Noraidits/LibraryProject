@@ -1,7 +1,10 @@
-﻿namespace TamrinApi.Servises.InterFace
+﻿using TamrinApi.Models;
+
+namespace TamrinApi.Servises.InterFace
 {
     public interface IGettingBookService
     {
-        void GetBookByMember(Guid memberId, Guid bookid);
+        public void GetBookByMember(Guid memberId, Guid bookid, Borrowing borrowing);
+        public void ReturnBook(Member member, Guid bookId);
     }
 }

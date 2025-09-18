@@ -10,21 +10,30 @@ namespace TamrinApi.Servises.models
     {
         private IMemberRepository _member;
         private IBookRepository _book;
-        public GettingBookService(IMemberRepository member, IBookRepository book)
+        private IBorrowingRepository _borrowing;
+        
+        public GettingBookService(IMemberRepository member, IBookRepository book, IBorrowingRepository borrowing )
         {
             _member = member;
             _book = book;
+            _borrowing = borrowing;
+            
         }
 
-        public void GetBookByMember(Guid memberId, Guid bookid)
-        {
-            if (_member.GetMemberById(memberId) == null) throw new Exception("your member is not exist");
+        public void GetBookByMember(Guid memberId, Guid bookid,Borrowing borrowing)
+        {   var member = _member.GetMemberById(memberId);
+            if (member == null) throw new Exception("your member is not exist");
             if (_book.getBookById(bookid) == null) throw new Exception("your book is not exist");
             if (!_member.memberCanBorrow(memberId)) throw new Exception("you can't borrow book(expiring or full 5 book");
             if (!_book.IsbookExisttoGet(bookid)) throw new Exception("your target book is not in library");
 
             _book.Removeavaliblebook(bookid);
-            _member.addActiveBook(memberId);
+            _member.AddBorrow(member , borrowing);
+            
+        }
+        public void ReturnBook(Member member,Guid bookId)
+        {
+
         }
     }
 }

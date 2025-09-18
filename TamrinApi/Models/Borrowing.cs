@@ -16,7 +16,7 @@
         public Guid memberid { get;private init; }
         public DateOnly borrowDate { get;private init;}
         public DateOnly shouldReturnDate { get; private init; }
-        public DateOnly returnDate { get;/*private*/ set; }
+        public DateOnly returnDate { get;private set; }
 
         public DateOnly MaxBrrowingDate => this.borrowDate.AddDays(14);
 

@@ -19,6 +19,7 @@ namespace TamrinApi.Repositories
         public void AddTOExpieryDate(Guid id)
         {
             var target = GetMemberById(id);
+            if (target == null) throw new Exception("your member is not exist");
             if (!target.isActive)
             {
                 target.expiryDate = DateOnly.FromDateTime(DateTime.Now).AddDays(180);
@@ -40,7 +41,7 @@ namespace TamrinApi.Repositories
         public void UpdateMember(Member member, Guid id)
         {
             var target = GetMemberById(id);
-
+            if (target == null) throw new Exception("your member is not exist");
             target.email = member.email;
             target.phoneNumber = member.phoneNumber;
             target.fullName = member.fullName;
@@ -49,7 +50,21 @@ namespace TamrinApi.Repositories
 
         }
 
-        void IMemberRepository.DeleteMemberById(Guid id)
+        public void AddBorrow(Member member, Borrowing borow)
+        {
+            member.AddBorrow(borow);
+        }
+        public void RemoveBorrow(Member member, Guid BorrowId)
+        {
+            member.RemoveBorrow(BorrowId);
+        }
+
+        //public void AddBorrow(Member member, Borrowing borow)
+        //{
+        //    member.AddBorrow(borow);
+        //}
+
+        public void DeleteMemberById(Guid id)
         {
             var target = GetMemberById(id);
             MemberDataBase.members.Remove(target);
@@ -91,6 +106,7 @@ namespace TamrinApi.Repositories
             }
             else if (DateOnly.FromDateTime(DateTime.Now) >= target.expiryDate)
             {
+                target.changeIsActive(false);
                 return false;
             }
             else if (target.ActiveBook >= 5)
