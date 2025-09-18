@@ -1,4 +1,5 @@
 ﻿using System.Dynamic;
+using System.Threading.Tasks;
 using TamrinApi.Interfaces;
 using TamrinApi.Models;
 using TamrinApi.Repositories;
@@ -16,15 +17,15 @@ namespace TamrinApi.Servises.models
             _book = book;
         }
 
-        public void GetBookByMember(Guid memberId, Guid bookid)
+        public async Task GetBookByMember(Guid memberId, Guid bookid)
         {
             if (_member.GetMemberById(memberId) == null) throw new Exception("your member is not exist");
             if (_book.getBookById(bookid) == null) throw new Exception("your book is not exist");
-            if (!_member.memberCanBorrow(memberId)) throw new Exception("you can't borrow book(expiring or full 5 book");
-            if (!_book.IsbookExisttoGet(bookid)) throw new Exception("your target book is not in library");
+            if (!await _member.memberCanBorrow(memberId)) throw new Exception("you can't borrow book(expiring or full 5 book");
+            if (!await _book.IsbookExisttoGet(bookid)) throw new Exception("your target book is not in library");
 
-            _book.Removeavaliblebook(bookid);
-            _member.addActiveBook(memberId);
+            await _book.Removeavaliblebook(bookid);
+            await _member.addActiveBook(memberId);
         }
     }
 }

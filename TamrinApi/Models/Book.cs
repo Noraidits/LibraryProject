@@ -4,6 +4,7 @@ namespace TamrinApi.Models
 {
     public class Book
     {
+        public Book() { }
         public Book( string titel, string auther, string categoty, uint publishedYear, uint totalCopies)
         {
             if (nameChecker(titel))  throw new Exception("titel is not valid");
@@ -52,5 +53,7 @@ namespace TamrinApi.Models
             if (this.availabaleCopies == 0) throw new Exception("availabal copies cant be smaller then 0");
             this.availabaleCopies--;
         }
+
+        
     }
 }

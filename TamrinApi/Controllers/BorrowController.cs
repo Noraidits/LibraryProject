@@ -30,7 +30,7 @@ namespace TamrinApi.Controllers
             _borrowingRepository.addBorrow(borrowing);
             return Ok(borrowing);
         }
-        [HttpGet("All")]
+        [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(_borrowingRepository.GetAllborrowing());
@@ -43,9 +43,9 @@ namespace TamrinApi.Controllers
         }
 
         [HttpPatch("{BarrowId}/ReturnDate")]
-        public IActionResult setReturnDate(Guid Id)
+        public IActionResult setReturnDate(Guid BarrowId)
         {
-            _borrowingRepository.updatereturndate(Id);
+            _borrowingRepository.updatereturndate(BarrowId);
             return NoContent();
         }
 

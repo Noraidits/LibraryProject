@@ -5,13 +5,13 @@ namespace TamrinApi.Interfaces
 {
     public interface IBorrowingRepository
     {
-        Borrowing? GetBorrowingByid(Guid id);
-        IEnumerable<Borrowing> GetAllborrowing();
-        IEnumerable<Borrowing> GetBorrowByMember(Guid memberid);
-        IEnumerable<Borrowing> GetBorrowByBook(Guid bookid);
-        void addBorrow(Borrowing borrow);
-        void updatereturndate (Guid id);
-        void AddborrowingForservice(Guid memberId, Guid bookId);
+        Task<Borrowing?> GetBorrowingByid(Guid id);
+        Task<IEnumerable<Borrowing>> GetAllborrowing();
+        Task<IEnumerable<Borrowing>> GetBorrowByMember(Guid memberid);
+        Task<IEnumerable<Borrowing>> GetBorrowByBook(Guid bookid);
+        Task addBorrow(Borrowing borrow);
+        Task updatereturndate (Guid id);
+        Task AddborrowingForservice(Guid memberId, Guid bookId);
     }
 
 }

@@ -1,29 +1,30 @@
 ﻿using TamrinApi.Models;
+using TamrinApi.Models.DTOs;
 namespace TamrinApi.Interfaces
 
 {
     public interface IBookRepository
     {
         
-       public Book? getBookById(Guid bookId);
+       public Task<Book?> getBookById(Guid bookId);
         
-       public IEnumerable<Book>? getBookByName(string bookName);
+       public Task<IEnumerable<Book>?> getBookByName(string bookName);
         
-       public IEnumerable<Book> getAllBooks();
+       public Task<IEnumerable<Book>> getAllBooks();
         
-       public void deleteBookById(Guid bookId);
+       public Task deleteBookById(Guid bookId);
         
-       public void addBook(Book book);
+       public Task addBook(Book book);
         
-       public void updateBook(Book book);
+       public Task updateBook(UpdateBookDto book);
         
-       public void addCopy(Guid ID, uint number);
+       public Task addCopy(Guid ID, uint number);
         
-       public void removeCopy(Guid ID, uint number);
+       public Task removeCopy(Guid ID, uint number);
 
-       public bool IsbookExisttoGet(Guid id);
+       public Task<bool> IsbookExisttoGet(Guid id);
 
-        public void Removeavaliblebook(Guid id);
-        public void Addavaleblebook(Guid id);
+        public Task Removeavaliblebook(Guid id);
+        public Task Addavaleblebook(Guid id);
     }
 }
